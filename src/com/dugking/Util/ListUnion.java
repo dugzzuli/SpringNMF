@@ -21,4 +21,14 @@ public class ListUnion {
 		}
 		return map.size();
 	}
+
+
+	public static int[] getDouble2Int(double[][] label) {
+		// TODO Auto-generated method stub
+		int[] arr=new int[label[0].length];
+		for (int i = 0; i < label[0].length; i++) {
+			arr[i]=(int)label[0][i];
+		}
+		return arr;
+	}
 }

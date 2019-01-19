@@ -21,6 +21,7 @@ import com.dugking.Util.ListUnion;
 import com.dugking.Util.SerizelizeModel;
 import com.dugking.algorithmMNMF.MNMF;
 import com.dugking.manifold.ConstrucGraph;
+import com.dugking.measure.ClusterEvaluation;
 import com.dugking.model.ClusterModel;
 import com.dugking.model.JsonQXChart;
 import com.dugking.model.Legend;
@@ -155,26 +156,36 @@ public class DemoController {
 		legend.setBorderWidth(1);
 		legend.setVerticalAlign("middle");
 		json.setLengend(legend);
+		int[] arrLabel=ListUnion.getDouble2Int(label);
 		
-
+		model2.getClusterLabel(model2.getW());
+		System.out.println(ClusterEvaluation.NMI(model2.getLabelCluster(), arrLabel));
 		return json;
  
 	}
 	
 	@RequestMapping(value="/getJsonCluster",method = RequestMethod.GET)
 	public @ResponseBody ClusterModel getJsonCluster(GetMethodParam model,HttpServletRequest request) {
-		System.out.println(model.toString());
+		String datasetPath=request.getServletContext().getRealPath("/dataset/");
+		model.setDatasets("/3sources.mat");
+		String datasetName=model.getDatasets();
+		Map<String, ArrayList<double[][]>> listData=FileUtil.getMatCell2ArrayList(datasetPath+datasetName,"data");
+		ArrayList<double[][]> arrDataSet=listData.get("data");
 		List<Matrix> listV=new ArrayList<Matrix>();
-		int[] label=new int[100];
-		for (int i = 0; i < 3; i++) {
-			listV.add(Matrix.random(100, 100).times(100));
-			if(i<50)
-			{
-				label[i]=1;
-			}else{
-				label[i]=0;
-			}
+		for (int i = 0; i < arrDataSet.size(); i++) {
+			double[][] dataSingle=arrDataSet.get(i);
+			Matrix mat = new Matrix(dataSingle).transpose();
+			double[][] inputData=mat.getArray();
+			ConstrucGraph modelGraph = new ConstrucGraph(inputData, 7, (int)Math.log(mat.getRowDimension()), GraphType.HeartKernel);
+			listV.add(modelGraph.getGraphKnn());
 		}
+		
+		Map<String, ArrayList<double[][]>> listLabel=FileUtil.getMatCell2ArrayList(datasetPath+datasetName, "truelabel");
+		double[][] label=listLabel.get("truelabel").get(0);
+		
+		int clusterNum=ListUnion.getCluster(label);
+		model.setClusterNum(clusterNum);
+		
 		MNMF model2=new MNMF(listV, 500, 3, Math.pow(0.1, 10), Math.pow(0.1, 10),1);
 		model2.update();
 		
@@ -186,7 +197,9 @@ public class DemoController {
 		System.out.println("-----ÇëÇójsonÊý¾Ý--------");
 		ClusterModel json=new ClusterModel();
 		json.setClusterVector(model2.getH().getArray());
-		json.setLabel(label);
+		
+		int[] arrLabel=ListUnion.getDouble2Int(label);
+		json.setLabel(arrLabel);
 		return json;
 	}
 

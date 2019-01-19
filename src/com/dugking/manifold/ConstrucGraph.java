@@ -86,7 +86,7 @@ public class ConstrucGraph {
 					//获取参数
 					double gama=-1.0/(gama1*gama2);
 					
-					weight=Math.exp(gama * weight);
+//					weight=Math.exp(gama * weight);
 					graph.setWeight(i, neighbors[j].index, weight);
 					//设置权重
 					break;

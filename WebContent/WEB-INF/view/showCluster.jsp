@@ -124,7 +124,30 @@ body {
 	}
 
 	labels = [];
+	function requestByJsonLoadData() {
 
+		$.ajax({
+			type: 'get',
+			url: '<%=basePath%>demo/getJsonCluster',
+			 dataType: "json",
+			/* data: {method:$("#method").val(), maxIter:$("#maxIter").val(),relarErr:$("#relarErr").val()}, */
+			//设置contentType类型为json
+			contentType : 'application/json;charset=utf-8',
+			//请求成功后的回调函数
+			success : function(datajson) {
+
+				alert(data);
+				data=datajson["clusterVector"];
+				labels=datajson["label"];
+				dataok=true;
+			},
+			fail : function() {
+
+			}
+
+		});
+
+	}
 	function preProLabels() {
 		var txt = $("#inlabels").val();
 		var lines = txt.split("\n");
@@ -181,7 +204,10 @@ body {
 	$(window)
 			.load(
 					function() {
-
+						
+						$("#loadData").click(function(){
+							requestByJsonLoadData();
+						});
 						initEmbedding();
 
 						$("#stopbut").click(function() {
@@ -193,12 +219,12 @@ body {
 										function() {
 
 											initEmbedding();
-											preProData();
+											/* preProData(); */
 											if (!dataok) { // this is so terrible... globals everywhere #fasthacking #sosorry
 												alert('there was trouble with data, probably rows had different number of elements. See console for output.');
 												return;
 											}
-											preProLabels();
+											/*preProLabels(); */
 											if (labels.length > 0) {
 												if (data.length !== labels.length) {
 													alert('number of rows in Text labels ('
@@ -272,6 +298,8 @@ body {
 	<div class="container">
 		<button type="button" id="inbut" class="btn btn-primary"
 			style="width: 200px; height: 50px;">Run t-SNE!</button>
+			<button type="button" id="loadData" class="btn btn-primary"
+			style="width: 200px; height: 50px;">loadData</button>
 		<button type="button" id="stopbut" class="btn btn-danger"
 			style="width: 200px; height: 50px;">Stop</button>
 
