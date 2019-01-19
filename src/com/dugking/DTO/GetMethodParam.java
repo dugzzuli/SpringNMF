@@ -1,7 +1,7 @@
 package com.dugking.DTO;
 
 public class GetMethodParam {
-	
+	private String datasets;
 	private String method;
 	private int clusterNum;
 	private int maxIter;
@@ -35,6 +35,12 @@ public class GetMethodParam {
 	}
 	public void setAbsoluteErr(String absoluteErr) {
 		this.absoluteErr = absoluteErr;
+	}
+	public String getDatasets() {
+		return datasets;
+	}
+	public void setDatasets(String datasets) {
+		this.datasets = datasets;
 	}
 	private String absoluteErr;
 	

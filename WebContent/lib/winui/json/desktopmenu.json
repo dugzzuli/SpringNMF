@@ -87,5 +87,16 @@
       "childs": null,
       "id": 58
     }
+    ,
+    {
+      "title": "showDataAnalysis",
+      "pageURL": "views/echarts/demo.html",
+      "name": "showDataAnalysis",
+      "icon": "fa-bar-chart",
+      "openType": 2,
+      "extend": false,
+      "childs": null,
+      "id": 5801
+    }
   ]
 }

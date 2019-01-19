@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dugking.DTO.GetMethodParam;
+import com.dugking.Util.FileUtil;
+import com.dugking.Util.ListUnion;
 import com.dugking.Util.SerizelizeModel;
 import com.dugking.algorithmMNMF.MNMF;
 import com.dugking.model.ClusterModel;
@@ -64,12 +66,23 @@ public class DemoController {
 	}
 	@RequestMapping(value="/getShopInJSON",method = RequestMethod.GET)
 	public @ResponseBody JsonQXChart getShopInJSON(GetMethodParam model,HttpServletRequest request) {
-		System.out.println(model.toString());
+		
+		String datasetPath=request.getServletContext().getRealPath("/dataset/");
+		model.setDatasets("/3sources.mat");
+		String datasetName=model.getDatasets();
+		Map<String, ArrayList<double[][]>> listData=FileUtil.getMatCell2ArrayList(datasetPath+datasetName,"data");
+		ArrayList<double[][]> arrDataSet=listData.get("data");
 		List<Matrix> listV=new ArrayList<Matrix>();
-		for (int i = 0; i < 3; i++) {
-			listV.add(Matrix.random(100, 100).times(100));
+		for (int i = 0; i < arrDataSet.size(); i++) {
+			double[][] dataSingle=arrDataSet.get(i);
+			listV.add(new Matrix(dataSingle));
 		}
-		model.setClusterNum(3);
+		
+		Map<String, ArrayList<double[][]>> listLabel=FileUtil.getMatCell2ArrayList(datasetPath+datasetName, "truelabel");
+		double[][] label=listLabel.get("truelabel").get(0);
+		int clusterNum=ListUnion.getCluster(label);
+		model.setClusterNum(clusterNum);
+		
 		MNMF model2=new MNMF(listV, Integer.valueOf(model.getMaxIter()), model.getClusterNum(), Math.pow(0.1,10), Math.pow(0.1, model.getRelarErr()),0);
 		model2.update();
 		

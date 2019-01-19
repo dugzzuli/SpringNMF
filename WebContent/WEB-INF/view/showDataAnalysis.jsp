@@ -112,9 +112,6 @@
 			<div class="col-md-12" id="container" style="margin-top:10px; backgroud:2px solid black"></div>
 		</div>
 	</div>
-	<nav class="navbar navbar-inverse navbar-fixed-bottom">
-		<div class="container">dugking</div>
-	</nav>
 </body>
 
 </html>

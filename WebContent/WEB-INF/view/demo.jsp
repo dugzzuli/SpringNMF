@@ -140,32 +140,8 @@ body {
 	}
 
 	dataok = false;
-	
-	function requestByJson() {
 
-		$.ajax({
-			type : 'get',
-			url : '<%=basePath%>/demo/getJsonCluster',
-
-			//设置contentType类型为json
-
-			contentType : 'application/json;charset=utf-8',
-
-			//请求成功后的回调函数
-
-			success : function(data) {
-
-				
-
-			},fail:function(){
-				
-			}
-
-		});
-
-	}
 	function preProData() {
-		
 		var txt = $("#incsv").val();
 		var d = $("#deltxt").val();
 		var lines = txt.split("\n");
@@ -211,41 +187,18 @@ body {
 						$("#stopbut").click(function() {
 							dotrain = false;
 						});
-						$("#loadData").click(function(){
-							$.ajax({
-								type : 'get',
-								url : '<%=basePath%>/demo/getJsonCluster',
 
-								//设置contentType类型为json
-
-								contentType : 'application/json;charset=utf-8',
-
-								//请求成功后的回调函数
-
-								success : function(dataJson) {
-									data=dataJson["clusterVector"];
-									labels=dataJson["label"];
-									dataok=true;
-								},fail:function(){
-									
-								}
-
-							});
-						});
 						$("#inbut")
 								.click(
 										function() {
 
 											initEmbedding();
-											
-											/* preProData();
-											 */
-											 if (!dataok) { // this is so terrible... globals everywhere #fasthacking #sosorry
-													alert('there was trouble with data, probably rows had different number of elements. See console for output.');
-													return;
-												}
-											/* preProLabels(); */
-											
+											preProData();
+											if (!dataok) { // this is so terrible... globals everywhere #fasthacking #sosorry
+												alert('there was trouble with data, probably rows had different number of elements. See console for output.');
+												return;
+											}
+											preProLabels();
 											if (labels.length > 0) {
 												if (data.length !== labels.length) {
 													alert('number of rows in Text labels ('
@@ -291,7 +244,127 @@ body {
 		<h1 style="text-align: center;">t-SNE CSV web demo</h1>
 		<div>tsne</div>
 	</div>
-	
+
+	<div class="container">
+		<hr>
+		<div class="row">
+			<div class="col-sm-12">
+				<b>Text labels:</b><br>
+				<textarea id="inlabels" style="width: 100%; height: 100px;">
+Alabama
+Alaska
+Arizona
+Arkansas
+California
+Colorado
+Connecticut
+Delaware
+Florida
+Georgia
+Hawaii
+Idaho
+Illinois
+Indiana
+Iowa
+Kansas
+Kentucky
+Louisiana
+Maine
+Maryland
+Massachusetts
+Michigan
+Minnesota
+Mississippi
+Missouri
+Montana
+Nebraska
+Nevada
+New Hampshire
+New Jersey
+New Mexico
+New York
+North Carolina
+North Dakota
+Ohio
+Oklahoma
+Oregon
+Pennsylvania
+Rhode Island
+South Carolina
+South Dakota
+Tennessee
+Texas
+Utah
+Vermont
+Virginia
+Washington
+West Virginia
+Wisconsin
+Wyoming
+      </textarea>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="container">
+		<hr>
+		<b>Data:</b><br>
+		<textarea id="incsv" style="width: 100%; height: 200px;">
+32.380120, -86.300629
+58.299740, -134.406794
+33.448260, -112.075774
+34.748655, -92.274494
+38.579065, -121.491014
+39.740010, -104.992259
+41.763325, -72.674069
+39.158035, -75.524734
+30.439775, -84.280649
+33.748315, -84.391109
+21.304770, -157.857614
+43.606980, -116.193409
+39.801055, -89.643604
+39.766910, -86.149964
+41.589790, -93.615659
+39.049285, -95.671184
+38.195070, -84.878694
+30.443345, -91.186994
+44.318036, -69.776218
+38.976700, -76.489934
+42.358635, -71.056699
+42.731940, -84.552249
+44.943829, -93.093326
+32.298690, -90.180489
+38.577515, -92.177839
+46.589760, -112.021202
+40.813620, -96.707739
+39.164885, -119.766999
+43.207250, -71.536604
+40.217875, -74.759404
+35.691543, -105.937406
+42.651445, -73.755254
+35.785510, -78.642669
+46.805372, -100.779334
+39.961960, -83.002984
+35.472015, -97.520354
+44.933260, -123.043814
+40.259865, -76.882230
+41.823875, -71.411994
+33.998550, -81.045249
+44.368924, -100.350158
+36.167783, -86.778365
+30.267605, -97.742984
+40.759505, -111.888229
+44.260299, -72.576264
+37.540700, -77.433654
+47.039231, -122.891366
+38.350195, -81.638989
+43.072950, -89.386694
+41.134815, -104.821544
+</textarea>
+
+	</div>
+
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-4">
@@ -302,7 +375,7 @@ body {
 					type="text" id="perptxt" maxlength="10" value="30"
 					style="width: 40px;"> <br>
 			</div>
-			<div class="col-sm-4 hidden">
+			<div class="col-sm-4">
 
 				My data is:
 				<form action="" id="datatypeform">
@@ -321,8 +394,6 @@ body {
 	<div class="container">
 		<button type="button" id="inbut" class="btn btn-primary"
 			style="width: 200px; height: 50px;">Run t-SNE!</button>
-			<button type="button" id="loadData" class="btn btn-primary"
-			style="width: 200px; height: 50px;">LoadData</button>
 		<button type="button" id="stopbut" class="btn btn-danger"
 			style="width: 200px; height: 50px;">Stop</button>
 
