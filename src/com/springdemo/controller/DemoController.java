@@ -16,9 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dugking.DTO.GetMethodParam;
 import com.dugking.Util.FileUtil;
+import com.dugking.Util.GraphType;
 import com.dugking.Util.ListUnion;
 import com.dugking.Util.SerizelizeModel;
 import com.dugking.algorithmMNMF.MNMF;
+import com.dugking.manifold.ConstrucGraph;
 import com.dugking.model.ClusterModel;
 import com.dugking.model.JsonQXChart;
 import com.dugking.model.Legend;
@@ -75,7 +77,9 @@ public class DemoController {
 		List<Matrix> listV=new ArrayList<Matrix>();
 		for (int i = 0; i < arrDataSet.size(); i++) {
 			double[][] dataSingle=arrDataSet.get(i);
-			listV.add(new Matrix(dataSingle));
+			double[][] inputData=new Matrix(dataSingle).transpose().getArray();
+			ConstrucGraph modelGraph = new ConstrucGraph(inputData, 7, 7, GraphType.HeartKernel);
+			listV.add(modelGraph.getGraphKnn());
 		}
 		
 		Map<String, ArrayList<double[][]>> listLabel=FileUtil.getMatCell2ArrayList(datasetPath+datasetName, "truelabel");
@@ -83,7 +87,7 @@ public class DemoController {
 		int clusterNum=ListUnion.getCluster(label);
 		model.setClusterNum(clusterNum);
 		
-		MNMF model2=new MNMF(listV, Integer.valueOf(model.getMaxIter()), model.getClusterNum(), Math.pow(0.1,10), Math.pow(0.1, model.getRelarErr()),0);
+		MNMF model2=new MNMF(listV, Integer.valueOf(model.getMaxIter()), model.getClusterNum(), Math.pow(0.1,10), Math.pow(0.1, model.getRelarErr()),1);
 		model2.update();
 		
 		String serModel=request.getServletContext().getRealPath("/model");
