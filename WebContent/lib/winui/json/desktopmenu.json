@@ -58,6 +58,16 @@
       "id": 22
     },
     {
+      "title": "更新日志",
+      "pageURL": "/systemlog/index",
+      "name": "更新日志",
+      "icon": "fa-clock-o",
+      "openType": 1,
+      "extend": false,
+      "childs": null,
+      "id": 60
+    },
+    {
       "title": "点赞",
       "pageURL": "http://fly.layui.com/case/u/3547992",
       "name": "点赞",
@@ -68,9 +78,9 @@
       "id": 62
     },
     {
-      "title": "Layui框架",
-      "pageURL": "http://www.layui.com/",
-      "name": "Layui",
+      "title": "数据分析",
+      "pageURL": "demo/showDataAnalysis",
+      "name": "数据分析",
       "icon": "http://www.layui.com/favicon.ico",
       "openType": 2,
       "extend": false,
@@ -89,9 +99,9 @@
     }
     ,
     {
-      "title": "showDataAnalysis",
-      "pageURL": "views/echarts/demo.html",
-      "name": "showDataAnalysis",
+      "title": "聚类展示",
+      "pageURL": "demo/showCluster",
+      "name": "聚类展示",
       "icon": "fa-bar-chart",
       "openType": 2,
       "extend": false,

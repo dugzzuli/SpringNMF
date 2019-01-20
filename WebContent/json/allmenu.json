@@ -33,16 +33,6 @@
       "id": 4
     },
     {
-      "title": "更新日志",
-      "pageURL": "/systemlog/index",
-      "name": "更新日志",
-      "icon": "fa-clock-o",
-      "openType": 1,
-      "extend": false,
-      "childs": null,
-      "id": 60
-    },
-    {
       "title": "点赞",
       "pageURL": "http://fly.layui.com/case/u/3547992",
       "name": "点赞",
@@ -51,16 +41,6 @@
       "extend": false,
       "childs": null,
       "id": 62
-    },
-    {
-      "title": "不落阁",
-      "pageURL": "http://www.lyblogs.cn",
-      "name": "作者博客",
-      "icon": "http://www.lyblogs.cn/Images/Global/Logo_40.png",
-      "openType": 2,
-      "extend": false,
-      "childs": null,
-      "id": 66
     },
     {
       "title": "系统设置",

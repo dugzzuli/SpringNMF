@@ -16,10 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dugking.DTO.GetMethodParam;
 import com.dugking.Util.FileUtil;
+import com.dugking.Util.GlobalData;
 import com.dugking.Util.GraphType;
 import com.dugking.Util.ListUnion;
 import com.dugking.Util.SerizelizeModel;
 import com.dugking.algorithmMNMF.MNMF;
+import com.dugking.algorithmMNMF.MNMF_Base;
 import com.dugking.manifold.ConstrucGraph;
 import com.dugking.measure.ClusterEvaluation;
 import com.dugking.model.ClusterModel;
@@ -151,13 +153,12 @@ public class DemoController {
 		
 		Legend legend=new Legend();
 		legend.setAlign("right");
-
 		legend.setLayout("vertical");
 		legend.setBorderWidth(1);
 		legend.setVerticalAlign("middle");
 		json.setLengend(legend);
 		int[] arrLabel=ListUnion.getDouble2Int(label);
-		
+		GlobalData.labelData=arrLabel;
 		model2.getClusterLabel(model2.getW());
 		System.out.println(ClusterEvaluation.NMI(model2.getLabelCluster(), arrLabel));
 		return json;
@@ -165,41 +166,15 @@ public class DemoController {
 	}
 	
 	@RequestMapping(value="/getJsonCluster",method = RequestMethod.GET)
-	public @ResponseBody ClusterModel getJsonCluster(GetMethodParam model,HttpServletRequest request) {
-		String datasetPath=request.getServletContext().getRealPath("/dataset/");
-		model.setDatasets("/3sources.mat");
-		String datasetName=model.getDatasets();
-		Map<String, ArrayList<double[][]>> listData=FileUtil.getMatCell2ArrayList(datasetPath+datasetName,"data");
-		ArrayList<double[][]> arrDataSet=listData.get("data");
-		List<Matrix> listV=new ArrayList<Matrix>();
-		for (int i = 0; i < arrDataSet.size(); i++) {
-			double[][] dataSingle=arrDataSet.get(i);
-			Matrix mat = new Matrix(dataSingle).transpose();
-			double[][] inputData=mat.getArray();
-			ConstrucGraph modelGraph = new ConstrucGraph(inputData, 7, (int)Math.log(mat.getRowDimension()), GraphType.HeartKernel);
-			listV.add(modelGraph.getGraphKnn());
-		}
-		
-		Map<String, ArrayList<double[][]>> listLabel=FileUtil.getMatCell2ArrayList(datasetPath+datasetName, "truelabel");
-		double[][] label=listLabel.get("truelabel").get(0);
-		
-		int clusterNum=ListUnion.getCluster(label);
-		model.setClusterNum(clusterNum);
-		
-		MNMF model2=new MNMF(listV, 500, 3, Math.pow(0.1, 10), Math.pow(0.1, 10),1);
-		model2.update();
-		
+	public @ResponseBody ClusterModel getJsonCluster(GetMethodParam model,HttpServletRequest request) {		
 		String serModel=request.getServletContext().getRealPath("/model");
-		SerizelizeModel.serlizeModel(model2, serModel+"MMNFModel.model");
-		
 		System.out.println(request.getServletContext().getRealPath("/model"));
-		model2=SerizelizeModel.deSerlizeModel(serModel+"MMNFModel.model");
+		MNMF_Base model2 = SerizelizeModel.deSerlizeModel(serModel+"MMNFModel.model");
 		System.out.println("-----ÇëÇójsonÊý¾Ý--------");
 		ClusterModel json=new ClusterModel();
-		json.setClusterVector(model2.getH().getArray());
+		json.setClusterVector(( model2).getH().getArray());
 		
-		int[] arrLabel=ListUnion.getDouble2Int(label);
-		json.setLabel(arrLabel);
+		json.setLabel(GlobalData.labelData);
 		return json;
 	}
 

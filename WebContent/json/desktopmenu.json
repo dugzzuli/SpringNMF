@@ -78,8 +78,8 @@
       "id": 62
     },
     {
-      "title": "Layui框架",
-      "pageURL": "http://www.layui.com/",
+      "title": "数据分析",
+      "pageURL": "demo/showDataAnalysis",
       "name": "Layui",
       "icon": "http://www.layui.com/favicon.ico",
       "openType": 2,

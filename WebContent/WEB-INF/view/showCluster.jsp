@@ -265,11 +265,7 @@ body {
 
 <body>
 
-	<div class="container">
-
-		<h1 style="text-align: center;">t-SNE CSV web demo</h1>
-	</div>
-	<div class="container hidden">
+<div class="container hidden">
 		<div class="row">
 			<div class="col-sm-4">
 				Delimiter (default is comma (CSV)): <input type="text" id="deltxt"

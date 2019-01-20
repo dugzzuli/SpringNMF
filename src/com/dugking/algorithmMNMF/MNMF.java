@@ -99,7 +99,8 @@ public class MNMF extends MNMF_Base {
 	public double getErrOBJ() {
 		double errAllMNMF = 0;
 		for (int i = 0; i < this.getViewNum(); i++) {
-			errAllMNMF = errAllMNMF + this.getNorm(this.getW().times(this.getListH().get(i).transpose()));
+			Matrix conV=this.getW().times(this.getListH().get(i).transpose());
+			errAllMNMF = errAllMNMF + this.getNorm(conV.minus(this.getListV().get(i)));
 		}
 		return errAllMNMF;
 	}

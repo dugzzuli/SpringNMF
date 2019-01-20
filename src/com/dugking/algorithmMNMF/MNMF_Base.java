@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import Jama.Matrix;
+import Jama.util.Maths;
 import smile.clustering.KMeans;
 
 public abstract class MNMF_Base implements Serializable {
@@ -280,6 +281,16 @@ public abstract class MNMF_Base implements Serializable {
 	public double getNorm(Matrix normV) {
 		return normV.normF();
 
+	}
+	private double getDoubleMatrix(Matrix normV){
+		double f = 0;
+		double[][] A = normV.getArray();
+	      for (int i = 0; i < m; i++) {
+	         for (int j = 0; j < n; j++) {
+	           f=f+A[i][j]*A[i][j];
+	         }
+	      }
+	      return Math.sqrt(f);
 	}
 	/**
 	 * @param V 检测一个矩阵是否含有负数
