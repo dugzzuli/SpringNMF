@@ -20,6 +20,18 @@
     <!-- 访问静态资源 -->
     <mvc:default-servlet-handler />
     
+    <!-- 配置MultipartResolver -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 上传文件大小限制，单位为字节-10Mb -->
+        <property name="maxUploadSize">
+            <value>10485760</value>
+        </property>
+        <!-- 请求的编码格式 -->
+        <property name="defaultEncoding">
+            <value>UTF-8</value>
+        </property>
+    </bean>
+    
     <!--支持Json的Bean,配置ViewResolver。 可以用多个ViewResolver。 使用order属性排序。 InternalResourceViewResolver放在最后。 -->
 	<bean
 		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
