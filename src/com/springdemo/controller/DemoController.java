@@ -21,6 +21,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dugking.DTO.ClusterInc;
+import com.dugking.DTO.GetArr;
 import com.dugking.DTO.GetMethodParam;
 import com.dugking.Util.FileUtil;
 import com.dugking.Util.GlobalData;
@@ -212,41 +214,17 @@ public class DemoController {
 
     }
     
-//    /*
-//     *采用spring提供的上传文件的方法
-//     */
-//    @RequestMapping("springUpload")
-//    public String  springUpload(HttpServletRequest request) throws IllegalStateException, IOException
-//    {
-//         long  startTime=System.currentTimeMillis();
-//         //将当前上下文初始化给  CommonsMutipartResolver （多部分解析器）
-//        CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(
-//                request.getSession().getServletContext());
-//        //检查form中是否有enctype="multipart/form-data"
-//        if(multipartResolver.isMultipart(request))
-//        {
-//            //将request变成多部分request
-//            MultipartHttpServletRequest multiRequest=(MultipartHttpServletRequest)request;
-//           //获取multiRequest 中所有的文件名
-//            Iterator iter=multiRequest.getFileNames();
-//             
-//            while(iter.hasNext())
-//            {
-//                //一次遍历所有文件
-//                MultipartFile file=multiRequest.getFile(iter.next().toString());
-//                if(file!=null)
-//                {
-//                    String path="E:/"+file.getOriginalFilename();
-//                    //上传
-//                    file.transferTo(new File(path));
-//                }
-//                 
-//            }
-//           
-//        }
-//        long  endTime=System.currentTimeMillis();
-//        System.out.println("方法三的运行时间："+String.valueOf(endTime-startTime)+"ms");
-//    return "/success"; 
-//    }
+    ///获得聚类结果
+    @RequestMapping(value="/getClusterInc",method = RequestMethod.POST)
+    public @ResponseBody ClusterInc getClusterInc(GetArr model)
+    {
+    	String[] A=model.getExpected().split(",");
+    	String[] B=model.getPredicted().split(",");
+    	ClusterInc modelJson=ClusterEvaluation.getClusterInc(A,B);
+		return modelJson;
+    	
+    }
+    
+
 
 }

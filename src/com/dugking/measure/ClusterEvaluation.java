@@ -7,7 +7,9 @@ import java.util.Map;
 import java.util.Map.Entry;  
 import java.util.Set;  
   
-import javax.rmi.CORBA.Util;  
+import javax.rmi.CORBA.Util;
+
+import com.dugking.DTO.ClusterInc;  
 
 
   
@@ -524,5 +526,22 @@ public class ClusterEvaluation {
         }else{  
             return m*factorial(m-1);  
         }  
-    }  
+    }
+	public static ClusterInc getClusterInc(String[] a, String[] b) {
+		int[] A=new int[a.length];
+		int[] B=new int[a.length];
+		for (int i = 0; i < a.length; i++) {
+			A[i]=Integer.valueOf( a[i])+10;
+			B[i]=Integer.valueOf( b[i])+10;
+		}
+		return ClusterEvaluation.getClusterInc(A,B);
+	}  
+	
+	 public static ClusterInc getClusterInc(int[] A,int[] B)
+	    {
+	    	ClusterInc model=new ClusterInc();
+
+	    	model.setPurity(String.valueOf(Purity(A, B)));
+			return model;
+	    }
 }  
