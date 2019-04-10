@@ -22,6 +22,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dugking.DTO.ClusterInc;
+import com.dugking.DTO.ClusterLabel;
 import com.dugking.DTO.GetArr;
 import com.dugking.DTO.GetMethodParam;
 import com.dugking.Util.FileUtil;
@@ -174,6 +175,9 @@ public class DemoController {
  
 	}
 	
+	
+	
+	
 	@RequestMapping(value="/getJsonCluster",method = RequestMethod.GET)
 	public @ResponseBody ClusterModel getJsonCluster(GetMethodParam model,HttpServletRequest request) {		
 		String serModel=request.getServletContext().getRealPath("/model");
@@ -190,6 +194,52 @@ public class DemoController {
 	public String uploadHtml() {
 		return "uploadHtml";
 	}
+	
+	
+	
+	
+	@RequestMapping(value="/getMVCLuster")
+	public @ResponseBody ClusterLabel getMVCLuster(GetMethodParam model,HttpServletRequest request) {
+		
+		String datasetPath=request.getServletContext().getRealPath("/dataset/");
+		model.setDatasets("/"+model.getDatasets());
+		
+		String datasetName=model.getDatasets();
+		Map<String, ArrayList<double[][]>> listData=FileUtil.getMatCell2ArrayList(datasetPath+datasetName,"data");
+		ArrayList<double[][]> arrDataSet=listData.get("data");
+		List<Matrix> listV=new ArrayList<Matrix>();
+		for (int i = 0; i < arrDataSet.size(); i++) {
+			double[][] dataSingle=arrDataSet.get(i);
+			double[][] inputData=new Matrix(dataSingle).transpose().getArray();
+			ConstrucGraph modelGraph = new ConstrucGraph(inputData, 7, 7, GraphType.HeartKernel);
+			listV.add(modelGraph.getGraphKnn());
+		}
+		
+		Map<String, ArrayList<double[][]>> listLabel=FileUtil.getMatCell2ArrayList(datasetPath+datasetName, "truelabel");
+		double[][] label=listLabel.get("truelabel").get(0);
+		int clusterNum=ListUnion.getCluster(label);
+		model.setClusterNum(clusterNum);
+		
+		MNMF model2=new MNMF(listV, Integer.valueOf(model.getMaxIter()), model.getClusterNum(), Math.pow(0.1,10), Math.pow(0.1, model.getRelarErr()),1);
+		model2.update();
+		
+		String serModel=request.getServletContext().getRealPath("/model");
+		SerizelizeModel.serlizeModel(model2, serModel+"MMNFModel.model");
+		
+		System.out.println(request.getServletContext().getRealPath("/model"));
+		model2=SerizelizeModel.deSerlizeModel(serModel+"MMNFModel.model");
+		
+		int[] arrLabel=ListUnion.getDouble2Int(label);
+		GlobalData.labelData=arrLabel;
+		model2.getClusterLabel(model2.getH());
+		System.out.println(ClusterEvaluation.NMI(model2.getLabelCluster(), arrLabel));
+		
+		ClusterLabel json=new ClusterLabel();
+		json.setLabel(model2.getLabelCluster());
+		json.setH(model2.getH().getArray());
+		return json;
+
+	}
 	 //上传文件会自动绑定到MultipartFile中
     @RequestMapping(value="/upload",method=RequestMethod.POST)
     public String upload(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws Exception {
@@ -197,7 +247,7 @@ public class DemoController {
        //如果文件不为空，写入上传路径
        if(!file.isEmpty()) {
            //上传文件路径
-           String path = request.getServletContext().getRealPath("/images/");
+           String path = request.getServletContext().getRealPath("/dataset/");
            //上传文件名
            String filename = file.getOriginalFilename();
            File filepath = new File(path,filename);
@@ -211,7 +261,6 @@ public class DemoController {
        } else {
            return "error";
        }
-
     }
     
     ///获得聚类结果
