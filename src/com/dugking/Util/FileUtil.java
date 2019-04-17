@@ -158,6 +158,7 @@ public class FileUtil {
 			String line;
 			String[] onerow;
 			int i = 0;
+//			System.out.println(in.lines().count());
 			while ((line = in.readLine()) != null) {
 				onerow = line.split(","); // 默认分割符为逗号，可以不使用逗号
 				if (i == 0) {

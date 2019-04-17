@@ -1,11 +1,19 @@
 package com.dugking.DTO;
 
 public class GetMethodParam {
+	
 	private String datasets;
 	private String method;
 	private int clusterNum;
 	private int maxIter;
 	private int relarErr;
+	private double aplpha;
+	public double getAplpha() {
+		return aplpha;
+	}
+	public void setAplpha(double aplpha) {
+		this.aplpha = aplpha;
+	}
 	public String getMethod() {
 		return method;
 	}

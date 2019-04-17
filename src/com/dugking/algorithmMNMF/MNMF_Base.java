@@ -313,6 +313,7 @@ public abstract class MNMF_Base implements Serializable {
 	 */
 	public abstract double getErrOBJ();
 	
+
 	
 	
 }

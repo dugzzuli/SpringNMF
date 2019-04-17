@@ -212,8 +212,9 @@ public class Single_GNMF {
 	 */
 	public double getGraphErr(){
 		Matrix L=this.getDG().minus(this.getWG());
+		Matrix tr=this.getH().transpose().times(L).times(this.getH());
 		
-		return L.normF();
+		return tr.trace();
 	}
 	/**
 	 * @param m

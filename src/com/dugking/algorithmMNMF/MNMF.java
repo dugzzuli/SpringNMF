@@ -26,7 +26,7 @@ public class MNMF extends MNMF_Base {
 		super(listV, maxIter, clusterNum, absErr, relarErr);
 		this.setVerbose(verbose);
 	}
-
+	
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub

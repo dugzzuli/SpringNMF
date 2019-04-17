@@ -14,6 +14,7 @@ import smile.clustering.KMeans;
 
 public class RunMain {
 	public static void main(String[] args) throws FileNotFoundException, IOException {
+		
 		Matrix W = FileUtil.loadDataSetTrain("src/com/dugking/resource/iris.csv", 150, 4, true);
 		int[] label=FileUtil.CSV2intArr("src/com/dugking/resource/label.csv", 150,true);
 		LaplanceDug eigenmap = new LaplanceDug(W.getArray(), 5, 0.5,GraphType.Binary);
@@ -28,5 +29,6 @@ public class RunMain {
 		System.out.println("∂‘”¶RandIndex:"+RandIndex+","+NMI2);
 		FileUtil.Arr2CSV(model.getLabelCluster(), "src/com/dugking/resource/pre.csv");
 		FileUtil.Matrix2CSV(model.getH(), "src/com/dugking/resource/H.csv");
+		
 	}
 }
