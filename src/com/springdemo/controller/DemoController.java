@@ -72,6 +72,12 @@ public class DemoController {
 		ModelAndView model = new ModelAndView("show");
 		return model;
 	}
+	
+	@RequestMapping("/multiview")
+	public ModelAndView multiview() {
+		ModelAndView model = new ModelAndView("multi_view");
+		return model;
+	}
 
 	@RequestMapping("/showCluster")
 	public ModelAndView showCluster() {
@@ -88,8 +94,13 @@ public class DemoController {
 	@RequestMapping(value = "/getShopInJSON", method = RequestMethod.GET)
 	public @ResponseBody JsonQXChart getShopInJSON(GetMethodParam model, HttpServletRequest request) {
 
-		String datasetPath = request.getServletContext().getRealPath("/dataset/");
-		model.setDatasets("/3sources.mat");
+		String datasetPath = request.getServletContext().getRealPath("/dataset/multiviewdata/");
+		if (model.getDatasets() == null ||model.getDatasets().equals(""))
+			model.setDatasets("/3sources.mat");
+		else {
+			model.setDatasets("/"+model.getDatasets()+".mat");
+		}
+		
 		String datasetName = model.getDatasets();
 		Map<String, ArrayList<double[][]>> listData = FileUtil.getMatCell2ArrayList(datasetPath + datasetName, "data");
 		ArrayList<double[][]> arrDataSet = listData.get("data");
@@ -168,6 +179,7 @@ public class DemoController {
 		int[] arrLabel = ListUnion.getDouble2Int(label);
 		GlobalData.labelData = arrLabel;
 		model2.getClusterLabel(model2.getW());
+		
 		System.out.println(ClusterEvaluation.NMI(model2.getLabelCluster(), arrLabel));
 		return json;
 
@@ -194,13 +206,12 @@ public class DemoController {
 	@RequestMapping(value = "/getSVCLuster")
 	public @ResponseBody ClusterLabel getSVCLuster(GetMethodParamGNMF model, HttpServletRequest request) {
 		ClusterLabel json = new ClusterLabel();
-		if(model.getClusterNum()<=0)
-		{
+		if (model.getClusterNum() <= 0) {
 			json.setCode(300);
 			json.setDesc("聚类簇不能小于0");
 		}
-		
-		else{
+
+		else {
 			String datasetPath = request.getServletContext().getRealPath("/dataset/");
 			model.setDatasets("/" + model.getDatasets());
 			String datasetName = model.getDatasets();
@@ -225,13 +236,11 @@ public class DemoController {
 	public @ResponseBody ClusterLabel getMVCLuster(GetMethodParam model, HttpServletRequest request) {
 
 		ClusterLabel json = new ClusterLabel();
-		if(model.getClusterNum()<=0)
-		{
+		if (model.getClusterNum() <= 0) {
 			json.setCode(300);
 			json.setDesc("聚类簇不能小于0");
 		}
-		
-		
+
 		String datasetPath = request.getServletContext().getRealPath("/dataset/");
 		model.setDatasets("/" + model.getDatasets());
 
@@ -266,7 +275,6 @@ public class DemoController {
 			int[] arrLabel = ListUnion.getDouble2Int(label);
 			GlobalData.labelData = arrLabel;
 			model2.getClusterLabel(model2.getH());
-
 
 			json.setLabel(model2.getLabelCluster());
 			json.setH(model2.getH().getArray());
@@ -337,4 +345,5 @@ public class DemoController {
 
 	}
 
+	
 }

@@ -13,7 +13,7 @@
 
 <head>
 <meta charset="utf-8">
-<title>tSNE CSV web demo</title>
+<title>可视化</title>
 <base href=" <%=basePath%>">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -42,12 +42,18 @@
 
 <style>
 svg {
-	border: 1px solid #333;
-	margin-top: 20px;
+	 border: 1px solid #333;
+	margin-top: 20px; 
 }
 
 body {
 	font-size: 16px;
+}
+
+.container {
+	margin-right: 0px;
+	margin-left: 0px;
+	width: 100%;
 }
 </style>
 
@@ -75,7 +81,7 @@ body {
 		$("#embed").empty();
 		var div = d3.select("#embed");
 		svg = div.append("svg") // svg is global
-		.attr("width", 1140).attr("height", 600);
+		.attr("width", $(document.body).width()-50).attr("height", 500);
 	}
 
 	var gs;
@@ -129,17 +135,17 @@ body {
 		$.ajax({
 			type: 'get',
 			url: '<%=basePath%>demo/getJsonCluster',
-			 dataType: "json",
+			dataType : "json",
 			/* data: {method:$("#method").val(), maxIter:$("#maxIter").val(),relarErr:$("#relarErr").val()}, */
 			//设置contentType类型为json
 			contentType : 'application/json;charset=utf-8',
 			//请求成功后的回调函数
 			success : function(datajson) {
 
-				alert(data);
-				data=datajson["clusterVector"];
-				labels=datajson["label"];
-				dataok=true;
+				alert("加载成功...");
+				data = datajson["clusterVector"];
+				labels = datajson["label"];
+				dataok = true;
 			},
 			fail : function() {
 
@@ -204,8 +210,8 @@ body {
 	$(window)
 			.load(
 					function() {
-						
-						$("#loadData").click(function(){
+
+						$("#loadData").click(function() {
 							requestByJsonLoadData();
 						});
 						initEmbedding();
@@ -265,7 +271,9 @@ body {
 
 <body>
 
-<div class="container hidden">
+	<div class="container hidden">
+	
+
 		<div class="row">
 			<div class="col-sm-4">
 				Delimiter (default is comma (CSV)): <input type="text" id="deltxt"
@@ -289,20 +297,22 @@ body {
 
 			</div>
 		</div>
+		
 	</div>
 
-	<div class="container">
-		<button type="button" id="inbut" class="btn btn-primary"
-			style="width: 200px; height: 50px;">Run t-SNE!</button>
-			<button type="button" id="loadData" class="btn btn-primary"
-			style="width: 200px; height: 50px;">loadData</button>
-		<button type="button" id="stopbut" class="btn btn-danger"
-			style="width: 200px; height: 50px;">Stop</button>
+	<div class="container" style=" padding-top:10px;">
 
-		<br>
+		<button type="button" id="loadData" class="btn btn-primary"    >加载数据</button>
+		<button type="button" id="inbut" class="btn btn-primary">可视化</button>
 
-		<div id="cost" style="text-align: left; font-family: Impact;"></div>
+		<button type="button" id="stopbut" class="btn btn-danger">停止</button>
+
+		&nbsp &nbsp &nbsp
+
+		<div id="cost" style=" display:inline; text-align: left; font-family: Impact;"></div>
+		
 		<div id="embed"></div>
+
 
 	</div>
 

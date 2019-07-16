@@ -68,7 +68,7 @@
       "id": 60
     },
     {
-      "title": "点赞",
+      "title": "多视角数据",
       "pageURL": "http://fly.layui.com/case/u/3547992",
       "name": "点赞",
       "icon": "fa-thumbs-up",
@@ -107,6 +107,17 @@
       "extend": false,
       "childs": null,
       "id": 5801
+    }
+     ,
+    {
+      "title": "多视角数据",
+      "pageURL": "demo/multiview",
+      "name": "showDataAnalysis",
+      "icon": "fa-bar-chart",
+      "openType": 2,
+      "extend": false,
+      "childs": null,
+      "id": 5802
     }
   ]
 }

@@ -12,8 +12,67 @@
 
 <head>
 <meta charset="UTF-8" />
-<title>Highcharts 教程 | 菜鸟教程(runoob.com)</title>
+<title>多视角聚类</title>
 <base href="<%=basePath%>">
+
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="col-sm-6">
+					<label>&nbsp数据集:</label> <select id=datasets class="btn btn-default">
+						<option value="3sources">3sources</option>
+					</select>
+				</div>
+			
+				<div class="col-sm-6">
+					<label>&nbsp&nbsp方法:</label> <select id="method" class="btn btn-default">
+						<option value="MNMF">MNMF</option>
+					</select>
+				</div>
+				
+			</div>
+			
+			<div class="col-sm-12" style="margin-top:10px">
+
+				<div class="col-sm-6">
+					<label>迭代次数:</label>
+					 <select id="maxIter" class="btn btn-default">
+						<option value="100">100</option>
+						<option value="500">500</option>
+						<option value="1000">1000</option>
+						<option value="5000">5000</option>
+						<option value="10000">10000</option>
+					</select>
+				</div>
+
+				<div class="col-sm-6">
+					<label>相对误差:</label> <select id="relarErr" class="btn btn-default">
+						<option value="1">1e-1</option>
+						<option value="2">1e-2</option>
+						<option value="3">1e-3</option>
+						<option value="4">1e-4</option>
+						<option value="5">1e-5</option>
+					</select>
+				</div>
+
+				
+			</div>
+			<div class="col-sm-12" style="margin-top:10px">
+			
+					&nbsp&nbsp&nbsp <input class="btn btn-primary" id="subJson" type="button" 
+						value="提交">
+			</div>
+			
+			<div class="col-sm-12" id="container"
+				style="margin-top: 10px; backgroud: 2px solid black"></div>
+		</div>
+	</div>
+</body>
+
+</html>
+
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="js/highcharts/highcharts.js"></script>
 <!-- Bootstrap -->
@@ -28,51 +87,21 @@
       <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
     <![endif]-->
 </head>
+<style>
+.container {
+	margin-left: 0px;
+	margin-right: 0px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	min-height: 500px;
+	width: 100%;
+}
+.select{
+width:105px;
+}
 
-<body>
-	<div class="container"
-		style="margin-top: 30px; padding-top: 10px; padding-bottom: 10px; min-height: 800px; background-color: floralwhite;">
-		<div class="row">
-			<div class="col-md-12">
-			<div class="col-md-3">
-			<label>方法:</label>
-				<select id="method" class="btn btn-default">
-					<option value="MNMF">MNMF</option>
-				</select>
-				</div>
-				<div class="col-md-3">
-				<label>迭代次数:</label>
-				<select id="maxIter" class="btn btn-default">
-					<option value="100">100</option>
-					<option value="500">500</option>
-					<option value="1000">1000</option>
-					<option value="5000">5000</option>
-					<option value="10000">10000</option>
-				</select>
-				</div>
-				
-				<div class="col-md-3">
-				<label>相对误差:</label>
-				
-				<select id="relarErr" class="btn btn-default">
-					<option value="1">1e-1</option>
-					<option value="2">1e-2</option>
-					<option value="3">1e-3</option>
-					<option value="4">1e-4</option>
-					<option value="5">1e-5</option>
-				</select>
-				</div>
-				<div class="col-md-3">
-				 <input class="btn btn-default" id="subJson" type="button" value="提交">
-				 </div>
+</style>
 
-			</div>
-			<div class="col-md-12" id="container" style="margin-top:10px; backgroud:2px solid black"></div>
-		</div>
-	</div>
-</body>
-
-</html>
 <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
@@ -82,8 +111,13 @@
 		$.ajax({
 			type: 'get',
 			url: '<%=basePath%>/demo/getShopInJSON',
-			 dataType: "json",
-			data: {method:$("#method").val(), maxIter:$("#maxIter").val(),relarErr:$("#relarErr").val()},
+			dataType : "json",
+			data : {
+				datasets : $("#datasets").val(),
+				method : $("#method").val(),
+				maxIter : $("#maxIter").val(),
+				relarErr : $("#relarErr").val()
+			},
 			//设置contentType类型为json
 			contentType : 'application/json;charset=utf-8',
 			//请求成功后的回调函数
@@ -123,10 +157,11 @@
 
 		$('#container').highcharts(json);
 	}
+	
 	$(document).ready(function() {
-		$("#subJson").click(function(){
-			requestByJson();	
+		$("#subJson").click(function() {
+			requestByJson();
 		});
-		
+
 	});
 </script>
