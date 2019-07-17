@@ -8,6 +8,13 @@ public class GetMethodParam {
 	private int maxIter;
 	private int relarErr;
 	private double aplpha;
+	int numsSamples;
+	public int getNumsSamples() {
+		return numsSamples;
+	}
+	public void setNumsSamples(int numsSamples) {
+		this.numsSamples = numsSamples;
+	}
 	public double getAplpha() {
 		return aplpha;
 	}

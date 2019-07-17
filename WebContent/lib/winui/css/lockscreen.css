@@ -1,4 +1,4 @@
-﻿/**
+/**
  
  @Name: winui
  @Author: Leo
@@ -42,8 +42,9 @@
     #login_div > img {
         width: 150px;
         height: 150px;
-        box-shadow: 0 0 4px 4px #fff;
-        background-color: rgba(255, 255, 255, 0.4);
+        opacity:0.4;
+        /* box-shadow: 0 0 4px 4px #fff;
+        background-color: rgba(255, 255, 255, 0.4); */
     }
 
 #user_name {

@@ -62,7 +62,7 @@
             },
             menu: {
                 options: {
-                    url: 'json/allmenu.json',
+                    url: 'demo/json/allmenu.json',
                     method: 'get',
                     data: { nihaoa: '' }
                 },
@@ -202,7 +202,7 @@
     if (window.localStorage.getItem("lockscreen") == "true") {
         winui.lockScreen(function (password) {
             //模拟解锁验证
-            if (password === 'winadmin') {
+            if (password === '1512') {
                 return true;
             } else {
                 winui.window.msg('密码错误', { shift: 6 });

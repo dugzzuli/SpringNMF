@@ -14,12 +14,11 @@
 <head>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <meta name="renderer" content="webkit">
-    <title>WinAdmin - Win10风格管理系统</title>
-    <base href="<%=basePath%>">
-    <link href="lib/layui/css/layui.css" rel="stylesheet" />
-    <link href="lib/animate/animate.min.css" rel="stylesheet" />
-    <link href="lib/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
-    <link href="lib/winui/css/winui.css" rel="stylesheet" />
+    <title>应急系统</title>
+    <link href="<%=basePath%>lib/layui/css/layui.css" rel="stylesheet" />
+    <link href="<%=basePath%>lib/animate/animate.min.css" rel="stylesheet" />
+    <link href="<%=basePath%>lib/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
+    <link href="<%=basePath%>lib/winui/css/winui.css" rel="stylesheet" />
     <style>
         body {
             /*在页面顶部加载背景最佳，如有必要这块可以从数据库读取*/
@@ -48,7 +47,7 @@
             </div>
         </div>
         <!-- 右边磁贴 -->
-        <div class="winui-start-right">
+        <div class="winui-start-center">
             <div class="layui-side-scroll">
                 <div class="winui-nav-tile">
                     <div class="winui-tilebox">
@@ -276,10 +275,10 @@
     </div>
 
     <!--layui.js-->
-    <script src="lib/layui/layui.js"></script>
+    <script src="<%=basePath%>lib/layui/layui.js"></script>
     <script>
         layui.config({
-            base: 'js/' //指定 index.js 路径
+            base: '<%=basePath%>js/' //指定 index.js 路径
             , version: '1.0.0-beta'
         }).use('index');
     </script>
