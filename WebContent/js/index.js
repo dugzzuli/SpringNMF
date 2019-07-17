@@ -10,7 +10,7 @@
     var $ = layui.jquery;
 
     $(function () {
-        winui.window.msg('Welcome To WinAdmin', {
+        winui.window.msg('欢迎进入公共安全预警系统', {
             time: 4500,
             offset: '40px',
             btn: ['点击进入全屏'],
@@ -210,7 +210,7 @@
         click: function (e) {
             winui.lockScreen(function (password) {
                 //模拟解锁验证
-                if (password === 'winadmin') {
+                if (password === '1512') {
                     return true;
                 } else {
                     winui.window.msg('密码错误', { shift: 6 });
