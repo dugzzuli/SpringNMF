@@ -21,14 +21,6 @@
             }
         });
 
-        //winui.window.open({
-        //    id: '公告',
-        //    type: 1,
-        //    title: '演示公告',
-        //    content: '<p style="padding:20px;">半成品仅供参观，多数设置本地存储，清除浏览器缓存即失效。<br/><br/>慢工出细活，如有需要的朋友请耐心等待。<br/><br/>望社区案例多多点赞，谢谢各位！<br/><br/>特色很多，如：<span style="color:#FF5722">桌面助手，主题设置</span>，大家慢慢参观</p>',
-        //    area: ['400px', '400px']
-        //});
-
         winui.config({
             settings: layui.data('winui').settings || {
                 color: 32,
@@ -62,7 +54,7 @@
             },
             menu: {
                 options: {
-                    url: 'demo/json/allmenu.json',
+                    url: 'json/allmenu.json',
                     method: 'get',
                     data: { nihaoa: '' }
                 },

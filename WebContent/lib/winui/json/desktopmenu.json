@@ -3,23 +3,11 @@
   "message": "成功",
   "data": [
     {
-      "title": "主题",
-      "pageURL": "theme",
-      "name": "主题",
-      "icon": "fa-television",
-      "openType": 1,
-      "maxOpen": -1,
-      "extend": false,
-      "childs": null,
-      "id": 1
-    },
-    {
       "title": "基于社区发现的谣言预测",
       "pageURL": "demo/comRumor",
       "name": "基于社区发现的谣言预测",
-      "icon": "fa-qrcode",
-      "openType": 1,
-      "maxOpen": -1,
+       "icon": "http://puq7bvxwj.bkt.clouddn.com/logo1.png",
+      "openType": 2,
       "extend": false,
       "childs": null,
       "id": 3
@@ -28,9 +16,8 @@
       "title": "DeepHawkes",
       "pageURL": "demo/DeepHawkes",
       "name": "DeepHawkes",
-      "icon": "fa-info-circle",
+       "icon": "http://puq7bvxwj.bkt.clouddn.com/logo1.png",
       "openType": 2,
-      "maxOpen": -1,
       "extend": false,
       "childs": null,
       "id": 4
@@ -39,9 +26,8 @@
       "title": "结构洞挖掘",
       "pageURL": "demo/structureHole",
       "name": "结构洞挖掘",
-      "icon": "fa-th-large",
+       "icon": "http://puq7bvxwj.bkt.clouddn.com/logo1.png",
       "openType": 2,
-      "maxOpen": -1,
       "extend": false,
       "childs": null,
       "id": 22
@@ -50,8 +36,8 @@
       "title": "Network Embedding",
       "pageURL": "demo/NetworkEmbedding",
       "name": "Network Embedding",
-      "icon": "fa-clock-o",
-      "openType": 1,
+      "icon": "http://puq7bvxwj.bkt.clouddn.com/logo1.png",
+      "openType": 2,
       "extend": false,
       "childs": null,
       "id": 60
@@ -60,7 +46,7 @@
       "title": "基于原路径的异质网络发现",
       "pageURL": "demo/meathPath",
       "name": "基于原路径的异质网络发现",
-      "icon": "fa-thumbs-up",
+       "icon": "http://puq7bvxwj.bkt.clouddn.com/logo1.png",
       "openType": 2,
       "extend": false,
       "childs": null,

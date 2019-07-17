@@ -61,8 +61,13 @@ public class DemoController {
 	@Autowired
 	public Humn humn;
 
-	@RequestMapping("/index")
+	@RequestMapping("/")
 	public String index() {
+		return "index";
+	}
+	
+	@RequestMapping("/index")
+	public String index2() {
 		return "index";
 	}
 
@@ -73,9 +78,54 @@ public class DemoController {
 
 	@RequestMapping("/showdatasets")
 	public String showdatasets() {
+		
 		return "showdatasets";
 	}
-
+	
+	@RequestMapping("/streamCluster")
+	public String streamCluster() {
+		return "streamCluster";
+	}
+	@RequestMapping("/streamOutlier")
+	public String streamOutlier() {
+		return "streamOutlier";
+	}
+	@RequestMapping("/overlapDetec")
+	public String overlapDetec() {
+		return "showdatasets";
+	}
+	@RequestMapping("/meathPath")
+	public String meathPath() {
+		return "meathPath";
+	}
+	@RequestMapping("/structureHole")
+	public String structureHole() {
+		return "structureHole";
+	}
+	
+	@RequestMapping("/NetworkEmbedding")
+	public String NetworkEmbedding() {
+		return "NetworkEmbedding";
+	}
+	
+	
+	@RequestMapping("/DeepHawkes")
+	public String DeepHawkes() {
+		return "DeepHawkes";
+	}
+	
+	@RequestMapping("/comRumor")
+	public String comRumor() {
+		return "comRumor";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping(value = "/showdatasetsDetails", method = RequestMethod.GET)
 	public @ResponseBody DatasetsAttr showdatasetsDetails(String datasetName) {
 

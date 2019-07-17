@@ -14,7 +14,8 @@
 <head>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <meta name="renderer" content="webkit">
-    <title>应急系统</title>
+    <title>公共安全预警系统</title>
+    <base href="<%=basePath%>" />
     <link href="<%=basePath%>lib/layui/css/layui.css" rel="stylesheet" />
     <link href="<%=basePath%>lib/animate/animate.min.css" rel="stylesheet" />
     <link href="<%=basePath%>lib/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
@@ -22,7 +23,7 @@
     <style>
         body {
             /*在页面顶部加载背景最佳，如有必要这块可以从数据库读取*/
-            background-image: url(images/bg_01.jpg);
+            background-image: url(<%=basePath%>images/bg_01.jpg);
         }
     </style>
 </head>
@@ -47,7 +48,7 @@
             </div>
         </div>
         <!-- 右边磁贴 -->
-        <div class="winui-start-center">
+        <div class="winui-start-right">
             <div class="layui-side-scroll">
                 <div class="winui-nav-tile">
                     <div class="winui-tilebox">
