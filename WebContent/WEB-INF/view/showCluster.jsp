@@ -22,28 +22,11 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/tsne.js"></script>
 
-<!-- Tracking code -->
-<script type="text/javascript">
-	var _gaq = _gaq || [];
-	_gaq.push([ '_setAccount', 'UA-3698471-13' ]);
-	_gaq.push([ '_trackPageview' ]);
-
-	(function() {
-		var ga = document.createElement('script');
-		ga.type = 'text/javascript';
-		ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl'
-				: 'http://www')
-				+ '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0];
-		s.parentNode.insertBefore(ga, s);
-	})();
-</script>
 
 <style>
 svg {
-	 border: 1px solid #333;
-	margin-top: 20px; 
+	border: 1px solid #333;
+	margin-top: 20px;
 }
 
 body {
@@ -87,21 +70,25 @@ body {
 	var gs;
 	var cs;
 	var ts;
-
+	var colorData=['red','green','black','pink','brown','beige','camel','amber','khaki','maroon'];
+	
 	function drawEmbedding() {
 
-		gs = svg.selectAll(".b").data(data).enter().append("g").attr("class",
-				"u");
-
+		gs = svg.selectAll(".b").data(data).enter().append("g").attr("class","u");
+		
 		cs = gs.append("circle").attr("cx", 0).attr("cy", 0).attr("r", 5).attr(
-				'stroke-width', 1).attr('stroke', 'black').attr('fill',
-				'rgb(100,100,255)');
-
+				'stroke-width', 1).attr('stroke', 'black').attr('fill',function(d,i){
+					 console.log(d,i); 
+					return colorData[i%colorData.length];
+				}
+				);
+		/* 'rgb(100,100,255)' */
 		if (labels.length > 0) {
 			ts = gs.append("text").attr("text-anchor", "top").attr("transform",
-					"translate(5, -5)").attr("font-size", 12).attr("fill",
-					"#333").text(function(d, i) {
-				return labels[i];
+					"translate(5, -5)").attr("font-size", 12).attr("fill",function(d,i){
+/* 						console.log(d); */
+						return colorData[labels[i%colorData.length]];
+					}).text(function(d, i) {return labels[i];
 			});
 		}
 
@@ -123,8 +110,12 @@ body {
 
 	function step() {
 		if (dotrain) {
+			if(T.iter>2000){
+				dotrain=false;
+			}
 			var cost = T.step(); // do a few steps
 			$("#cost").html("iteration " + T.iter + ", cost: " + cost);
+			
 		}
 		updateEmbedding();
 	}
@@ -144,6 +135,7 @@ body {
 
 				alert("加载成功...");
 				data = datajson["clusterVector"];
+				
 				labels = datajson["label"];
 				dataok = true;
 			},
@@ -154,56 +146,11 @@ body {
 		});
 
 	}
-	function preProLabels() {
-		var txt = $("#inlabels").val();
-		var lines = txt.split("\n");
-		labels = [];
-		for (var i = 0; i < lines.length; i++) {
-			var row = lines[i];
-			if (!/\S/.test(row)) {
-				// row is empty and only has whitespace
-				continue;
-			}
-			labels.push(row);
-		}
-	}
+	
 
 	dataok = false;
 
-	function preProData() {
-		var txt = $("#incsv").val();
-		var d = $("#deltxt").val();
-		var lines = txt.split("\n");
-		var raw_data = [];
-		var dlen = -1;
-		dataok = true;
-		for (var i = 0; i < lines.length; i++) {
-			var row = lines[i];
-			if (!/\S/.test(row)) {
-				// row is empty and only has whitespace
-				continue;
-			}
-			var cells = row.split(d);
-			var data_point = [];
-			for (var j = 0; j < cells.length; j++) {
-				if (cells[j].length !== 0) {
-					data_point.push(parseFloat(cells[j]));
-				}
-			}
-			var dl = data_point.length;
-			if (i === 0) {
-				dlen = dl;
-			}
-			if (dlen !== dl) {
-				// TROUBLE. Not all same length.
-				console.log('TROUBLE: row ' + i + ' has bad length ' + dlen);
-				dlen = dl; // hmmm... 
-				dataok = false;
-			}
-			raw_data.push(data_point);
-		}
-		data = raw_data; // set global
-	}
+	
 
 	dotrain = true;
 	iid = -1;
@@ -214,7 +161,6 @@ body {
 						$("#loadData").click(function() {
 							requestByJsonLoadData();
 						});
-						initEmbedding();
 
 						$("#stopbut").click(function() {
 							dotrain = false;
@@ -225,12 +171,12 @@ body {
 										function() {
 
 											initEmbedding();
-											/* preProData(); */
+											
 											if (!dataok) { // this is so terrible... globals everywhere #fasthacking #sosorry
 												alert('there was trouble with data, probably rows had different number of elements. See console for output.');
 												return;
 											}
-											/*preProLabels(); */
+											
 											if (labels.length > 0) {
 												if (data.length !== labels.length) {
 													alert('number of rows in Text labels ('
@@ -248,7 +194,7 @@ body {
 														.val()),
 												perplexity : parseInt($(
 														"#perptxt").val()),
-												dim : data[0].length
+												dim : 2
 											};
 											T = new tsnejs.tSNE(opt); // create a tSNE instance
 
@@ -258,7 +204,9 @@ body {
 											if (dfv === 'raw') {
 												console.log('raw');
 												T.initDataRaw(data);
+												
 											}
+											
 											drawEmbedding();
 											iid = setInterval(step, 10);
 											dotrain = true;
@@ -271,19 +219,23 @@ body {
 
 <body>
 
-	<div class="container hidden">
-	
+	<div class="container">
+
 
 		<div class="row">
-			<div class="col-sm-4">
-				Delimiter (default is comma (CSV)): <input type="text" id="deltxt"
-					maxlength="3" value="," style="width: 20px;"> <br>
+			<div class="col-sm-12">
+
 				Learning rate: <input type="text" id="lrtxt" maxlength="10"
 					value="10" style="width: 40px;"> Perplexity: <input
 					type="text" id="perptxt" maxlength="10" value="30"
 					style="width: 40px;"> <br>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-4 hidden">
+				Delimiter (default is comma (CSV)): <input type="text" id="deltxt"
+					maxlength="3" value="," style="width: 20px;"> <br>
+
+			</div>
+			<div class="col-sm-4 hidden">
 
 				My data is:
 				<form action="" id="datatypeform">
@@ -297,20 +249,22 @@ body {
 
 			</div>
 		</div>
-		
+
 	</div>
 
-	<div class="container" style=" padding-top:10px;">
+	<div class="container" style="padding-top: 10px;">
 
-		<button type="button" id="loadData" class="btn btn-primary"    >加载数据</button>
+		<button type="button" id="loadData" class="btn btn-primary">加载数据</button>
+		&nbsp &nbsp &nbsp
 		<button type="button" id="inbut" class="btn btn-primary">可视化</button>
-
+		&nbsp &nbsp &nbsp
 		<button type="button" id="stopbut" class="btn btn-danger">停止</button>
 
 		&nbsp &nbsp &nbsp
 
-		<div id="cost" style=" display:inline; text-align: left; font-family: Impact;"></div>
-		
+		<div id="cost"
+			style="display: inline; text-align: left; font-family: Impact;"></div>
+
 		<div id="embed"></div>
 
 

@@ -82,6 +82,10 @@ public class DemoController {
 		return "showdatasets";
 	}
 	
+	@RequestMapping(value={"/theme"})
+	public String theme() {
+		return "theme";
+	}
 	@RequestMapping("/streamCluster")
 	public String streamCluster() {
 		return "streamCluster";

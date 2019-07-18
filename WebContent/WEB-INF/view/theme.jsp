@@ -1,30 +1,28 @@
-
-<!-- ÂÒÂë -->
-
-  
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <script>
     layui.link(winui.path + 'css/theme.css');
 </script>
 
 <div class="winui-tab" style="height:100%">
     <div class="winui-tab-left">
-        <div class="winui-tab-title">Ö÷Ìâ</div>
+        <div class="winui-tab-title">ä¸»é¢˜</div>
         <div class="winui-scroll-y" style="height:auto;position:absolute;top:50px;bottom:0;">
             <ul class="winui-tab-nav">
-                <li class="winui-this"><i class="fa fa-picture-o fa-fw"></i>±³¾°</li>
-                <li><i class="fa fa-paw fa-fw"></i>ÑÕÉ«</li>
-                <li><i class="fa fa-lock fa-fw"></i>ËøÆÁ½çÃæ</li>
-                <li><i class="fa fa-windows fa-fw"></i>¿ªÊ¼</li>
-                <li><i class="fa fa-tasks fa-fw"></i>ÈÎÎñÀ¸</li>
+                <li class="winui-this"><i class="fa fa-picture-o fa-fw"></i>èƒŒæ™¯</li>
+                <li><i class="fa fa-paw fa-fw"></i>é¢œè‰²</li>
+                <li><i class="fa fa-lock fa-fw"></i>é”å±ç•Œé¢</li>
+                <li><i class="fa fa-windows fa-fw"></i>å¼€å§‹</li>
+                <li><i class="fa fa-tasks fa-fw"></i>ä»»åŠ¡æ </li>
             </ul>
         </div>
     </div>
     <div class="winui-tab-right">
         <div class="winui-scroll-y">
             <div class="winui-tab-content">
-                <!-- ±³¾°ÉèÖÃ -->
+                <!-- èƒŒæ™¯è®¾ç½® -->
                 <div class="winui-tab-item layui-show">
-                    <h1>Ô¤ÀÀ</h1>
+                    <h1>é¢„è§ˆ</h1>
                     <div class="background-preview">
                         <div class="preview-start">
                             <ul class="preview-menu">
@@ -84,11 +82,11 @@
                         </div>
                         <div class="preview-window">
                             <div class="preview-window-title"><p></p></div>
-                            <span>Ê¾ÀýÎÄ±¾</span>
+                            <span>ç¤ºä¾‹æ–‡æœ¬</span>
                         </div>
                         <div class="preview-taskbar"></div>
                     </div>
-                    <h2>Ñ¡ÔñÍ¼Æ¬</h2>
+                    <h2>é€‰æ‹©å›¾ç‰‡</h2>
                     <div class="background-choose">
                         <img src="images/bg_01.jpg" />
                         <img src="images/bg_02.jpg" />
@@ -96,16 +94,16 @@
                         <img src="images/bg_04.jpg" />
                         <img src="images/bg_05.jpg" />
                     </div>
-                    <!-- ÉÏ´«Í¼Æ¬ -->
+                    <!-- ä¸Šä¼ å›¾ç‰‡ -->
                     <input type="file" name="file" class="layui-upload-file" style="display:none;">
                     <div class="background-upload">
-                        ä¯ÀÀ
+                        æµè§ˆ
                     </div>
-                    <div style="color:#ff6a00;margin-top:50px;">Tips£ºÖ÷ÌâµÄÏà¹ØÉèÖÃ´æ´¢ÓÚ±¾µØ£¬ÏÂ´Î´ò¿ª¿ÉÖ±½ÓÊ¹ÓÃ</div>
+                    <div style="color:#ff6a00;margin-top:50px;">Tipsï¼šä¸»é¢˜çš„ç›¸å…³è®¾ç½®å­˜å‚¨äºŽæœ¬åœ°ï¼Œä¸‹æ¬¡æ‰“å¼€å¯ç›´æŽ¥ä½¿ç”¨</div>
                 </div>
-                <!-- ÑÕÉ«ÉèÖÃ -->
+                <!-- é¢œè‰²è®¾ç½® -->
                 <div class="winui-tab-item">
-                    <h1>Ô¤ÀÀ</h1>
+                    <h1>é¢„è§ˆ</h1>
                     <div class="background-preview">
                         <div class="preview-start">
                             <ul class="preview-menu">
@@ -165,11 +163,11 @@
                         </div>
                         <div class="preview-window">
                             <div class="preview-window-title"><p></p></div>
-                            <span>Ê¾ÀýÎÄ±¾</span>
+                            <span>ç¤ºä¾‹æ–‡æœ¬</span>
                         </div>
                         <div class="preview-taskbar"></div>
                     </div>
-                    <h2>Ö÷ÌâÉ«</h2>
+                    <h2>ä¸»é¢˜è‰²</h2>
                     <div class="color-choose">
                         <div class="theme-color-11"></div>
                         <div class="theme-color-12"></div>
@@ -212,23 +210,23 @@
                         <div class="theme-color-57"></div>
                         <div class="theme-color-58"></div>
                     </div>
-                    <h2>ÏÔÊ¾"¿ªÊ¼"²Ëµ¥¡¢ÈÎÎñÀ¸ºÍ²Ù×÷ÖÐÐÄÑÕÉ«£¨Î´ÊµÏÖ£©</h2>
+                    <h2>æ˜¾ç¤º"å¼€å§‹"èœå•ã€ä»»åŠ¡æ å’Œæ“ä½œä¸­å¿ƒé¢œè‰²ï¼ˆæœªå®žçŽ°ï¼‰</h2>
                     <div class="layui-form winui-switch">
-                        <input type="checkbox" lay-filter="toggleTransparent" lay-skin="switch" checked><span style="margin-left:15px; vertical-align:middle">¿ª</span>
+                        <input type="checkbox" lay-filter="toggleTransparent" lay-skin="switch" checked><span style="margin-left:15px; vertical-align:middle">å¼€</span>
                     </div>
-                    <h2>ÏÔÊ¾±êÌâÀ¸ÑÕÉ«£¨Î´ÊµÏÖ£©</h2>
+                    <h2>æ˜¾ç¤ºæ ‡é¢˜æ é¢œè‰²ï¼ˆæœªå®žçŽ°ï¼‰</h2>
                     <div class="layui-form winui-switch">
-                        <input type="checkbox" lay-filter="toggleTransparent" lay-skin="switch" checked><span style="margin-left:15px; vertical-align:middle">¿ª</span>
+                        <input type="checkbox" lay-filter="toggleTransparent" lay-skin="switch" checked><span style="margin-left:15px; vertical-align:middle">å¼€</span>
                     </div>
-                    <div style="color:#ff6a00;margin-top:20px;">Tips£º5ÅÅ8ÁÐÖ÷ÌâÉ«¾¡ÇéÏíÓÃ</div>
+                    <div style="color:#ff6a00;margin-top:20px;">Tipsï¼š5æŽ’8åˆ—ä¸»é¢˜è‰²å°½æƒ…äº«ç”¨</div>
                 </div>
-                <!-- ËøÆÁ½çÃæ -->
+                <!-- é”å±ç•Œé¢ -->
                 <div class="winui-tab-item">
-                    <h1>Ô¤ÀÀ</h1>
+                    <h1>é¢„è§ˆ</h1>
                     <div class="lockscreen-preview">
                         <div class="lockscreen-preview-time"></div>
                     </div>
-                    <h2>Ñ¡ÔñÍ¼Æ¬</h2>
+                    <h2>é€‰æ‹©å›¾ç‰‡</h2>
                     <div class="lockscreen-choose">
                         <img src="images/bg_01.jpg" />
                         <img src="images/bg_02.jpg" />
@@ -236,16 +234,16 @@
                         <img src="images/bg_04.jpg" />
                         <img src="images/bg_05.jpg" />
                     </div>
-                    <!-- ÉÏ´«Í¼Æ¬ -->
+                    <!-- ä¸Šä¼ å›¾ç‰‡ -->
                     <input type="file" name="file" class="layui-upload-file" style="display:none;">
                     <div class="lockscreen-upload">
-                        ä¯ÀÀ
+                        æµè§ˆ
                     </div>
-                    <div style="color:#ff6a00;margin-top:20px;">Tips£ºËøÆÁ¹¦ÄÜÔÝÎ´ÊµÏÖ</div>
+                    <div style="color:#ff6a00;margin-top:20px;">Tipsï¼šé”å±åŠŸèƒ½æš‚æœªå®žçŽ°</div>
                 </div>
-                <!-- ¿ªÊ¼ -->
+                <!-- å¼€å§‹ -->
                 <div class="winui-tab-item">
-                    <h1>Ô¤ÀÀ</h1>
+                    <h1>é¢„è§ˆ</h1>
                     <div class="background-preview">
                         <div class="preview-start">
                             <ul class="preview-menu">
@@ -305,37 +303,37 @@
                         </div>
                         <div class="preview-window">
                             <div class="preview-window-title"><p></p></div>
-                            <span>Ê¾ÀýÎÄ±¾</span>
+                            <span>ç¤ºä¾‹æ–‡æœ¬</span>
                         </div>
                         <div class="preview-taskbar"></div>
                     </div>
-                    <h2>Ê¹ÓÃÈ«ÆÁÄ»"¿ªÊ¼"²Ëµ¥£¨Î´ÊµÏÖ£©</h2>
+                    <h2>ä½¿ç”¨å…¨å±å¹•"å¼€å§‹"èœå•ï¼ˆæœªå®žçŽ°ï¼‰</h2>
                     <div class="layui-form winui-switch">
-                        <input type="checkbox" lay-filter="toggle" lay-skin="switch"><span style="margin-left:15px; vertical-align:middle">¹Ø</span>
+                        <input type="checkbox" lay-filter="toggle" lay-skin="switch"><span style="margin-left:15px; vertical-align:middle">å…³</span>
                     </div>
-                    <h2>¿ªÊ¼²Ëµ¥³ß´ç</h2>
+                    <h2>å¼€å§‹èœå•å°ºå¯¸</h2>
                     <div class="layui-form winui-radio start-size">
-                        <input type="radio" name="startsize" value="xs" title="ÃÔÄã" lay-filter="startSize">
-                        <input type="radio" name="startsize" value="sm" title="ÖÐµÈ" lay-filter="startSize">
-                        <input type="radio" name="startsize" value="lg" title="¿í³¨" lay-filter="startSize">
+                        <input type="radio" name="startsize" value="xs" title="è¿·ä½ " lay-filter="startSize">
+                        <input type="radio" name="startsize" value="sm" title="ä¸­ç­‰" lay-filter="startSize">
+                        <input type="radio" name="startsize" value="lg" title="å®½æ•ž" lay-filter="startSize">
                     </div>
-                    <div style="color:#ff6a00;margin-top:20px;">Tips£ºÃÔÄã²»ÏÔÊ¾´ÅÌù£¬ÖÐµÈÏÔÊ¾Ò»ÁÐ´ÅÌù£¬¿í³¨ÏÔÊ¾Á½ÁÐ´ÅÌù</div>
+                    <div style="color:#ff6a00;margin-top:20px;">Tipsï¼šè¿·ä½ ä¸æ˜¾ç¤ºç£è´´ï¼Œä¸­ç­‰æ˜¾ç¤ºä¸€åˆ—ç£è´´ï¼Œå®½æ•žæ˜¾ç¤ºä¸¤åˆ—ç£è´´</div>
                 </div>
-                <!-- ÈÎÎñÀ¸ -->
+                <!-- ä»»åŠ¡æ  -->
                 <div class="winui-tab-item">
-                    <h1>ÈÎÎñÀ¸</h1>
-                    <h2 style="margin-top:0;">×Ô¶¯Òþ²ØÈÎÎñÀ¸£¨Î´ÊµÏÖ£©</h2>
+                    <h1>ä»»åŠ¡æ </h1>
+                    <h2 style="margin-top:0;">è‡ªåŠ¨éšè—ä»»åŠ¡æ ï¼ˆæœªå®žçŽ°ï¼‰</h2>
                     <div class="layui-form winui-switch">
-                        <input type="checkbox" lay-filter="toggleTaskbar" lay-skin="switch"><span style="margin-left:15px; vertical-align:middle">¹Ø</span>
+                        <input type="checkbox" lay-filter="toggleTaskbar" lay-skin="switch"><span style="margin-left:15px; vertical-align:middle">å…³</span>
                     </div>
-                    <h2>ÈÎÎñÀ¸ÔÚÆÁÄ»ÉÏµÄÎ»ÖÃ</h2>
+                    <h2>ä»»åŠ¡æ åœ¨å±å¹•ä¸Šçš„ä½ç½®</h2>
                     <div class="layui-form winui-radio taskbar-position">
-                        <input type="radio" name="position" value="top" title="¶¥²¿" lay-filter="taskPosition">
-                        <input type="radio" name="position" value="bottom" title="µ×²¿" lay-filter="taskPosition">
-                        <input type="radio" name="position" value="left" title="¿¿×ó" lay-filter="taskPosition">
-                        <input type="radio" name="position" value="right" title="¿¿ÓÒ" lay-filter="taskPosition">
+                        <input type="radio" name="position" value="top" title="é¡¶éƒ¨" lay-filter="taskPosition">
+                        <input type="radio" name="position" value="bottom" title="åº•éƒ¨" lay-filter="taskPosition">
+                        <input type="radio" name="position" value="left" title="é å·¦" lay-filter="taskPosition">
+                        <input type="radio" name="position" value="right" title="é å³" lay-filter="taskPosition">
                     </div>
-                    <div style="color:#ff6a00;margin-top:20px;">Tips£ºÈÎÎñÀ¸¿¿×ó¿¿ÓÒÔÝÎ´ÊµÏÖ,Òþ²ØÈÎÎñÀ¸ÔÝÎ´ÊµÏÖ</div>
+                    <div style="color:#ff6a00;margin-top:20px;">Tipsï¼šä»»åŠ¡æ é å·¦é å³æš‚æœªå®žçŽ°,éšè—ä»»åŠ¡æ æš‚æœªå®žçŽ°</div>
                 </div>
             </div>
         </div>
@@ -343,3 +341,4 @@
 </div>
 
 <script src="lib/winui/js/theme.js"></script>
+

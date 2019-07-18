@@ -517,7 +517,7 @@ layui.define(['layer', 'winui'], function (exports) {
     //打开主题设置窗口
     winLayer.openTheme = function () {
         var that = this;
-        $.get(winui.path + 'html/setting/theme.html', {}, function (content) {
+        $.post('demo/theme', {}, function (content) {
             that.open({
                 id: 'winui-theme',
                 type: 1,
