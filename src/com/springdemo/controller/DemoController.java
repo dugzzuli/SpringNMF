@@ -55,20 +55,20 @@ import com.springdemo.services.Humn;
 import Jama.Matrix;
 
 @Controller
-@RequestMapping("/demo")
+@RequestMapping(value={"/demo","/"})
 public class DemoController {
 
 	@Autowired
 	public Humn humn;
 
-	@RequestMapping("/")
+	@RequestMapping(value={"/index","/"})
 	public String index() {
 		return "index";
 	}
 	
-	@RequestMapping("/index")
-	public String index2() {
-		return "index";
+	@RequestMapping("/login")
+	public String login() {
+		return "login";
 	}
 
 	@RequestMapping("/demo")

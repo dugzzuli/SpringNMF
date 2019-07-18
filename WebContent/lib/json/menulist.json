@@ -1,147 +1,143 @@
 ﻿{
   "code": 0,
   "msg": "",
-  "count": 41,
+  "count": 10,
   "data": [
-    {
-      "title": "个性化",
-      "pageURL": "/home/individuation",
-      "name": "个性化",
-      "icon": "fa-television",
-      "openType": 2,
-      "level": 1,
-      "isNecessary": true,
-      "parentId": 0,
-      "order": 0,
-      "extend": false,
-      "childs": null,
-      "id": 1
-    },
-    {
-      "title": "打赏作者",
-      "pageURL": "/home/reward",
-      "name": "打赏作者",
-      "icon": "fa-qrcode",
-      "openType": 1,
-      "level": 1,
-      "isNecessary": true,
-      "parentId": 0,
-      "order": 1,
-      "extend": false,
-      "childs": null,
-      "id": 3
-    },
-    {
+  {
       "title": "基本说明",
       "pageURL": "views/demo/introduce.html",
       "name": "基本说明",
       "icon": "fa-info-circle",
       "openType": 2,
-      "level": 1,
-      "isNecessary": true,
-      "parentId": 0,
-      "order": 2,
+      "maxOpen": -1,
       "extend": false,
       "childs": null,
       "id": 4
     },
     {
-      "title": "菜单设置",
+      "title": "系统菜单",
       "pageURL": "views/menu/list_iframe.html",
-      "name": "菜单设置",
+      "name": "系统菜单",
       "icon": "fa-navicon",
       "openType": 2,
-      "level": 2,
-      "isNecessary": true,
-      "parentId": 23,
-      "order": 3,
+      "maxOpen": -1,
       "extend": false,
       "childs": null,
       "id": 2
     },
     {
-      "title": "操作员管理",
-      "pageURL": "/operator/index",
-      "name": "操作员管理",
-      "icon": "fa-user",
+      "title": "社会传感",
+      "pageURL": null,
+      "name": "社会传感",
+      "icon": "fa-cog",
+      "openType": 1,
+      "extend": false,
+      "childs": [
+         {
+      "title": "流数据异常检测",
+      "pageURL": "demo/streamOutlier",
+      "name": "流数据异常检测",
+      "icon": "http://puq7bvxwj.bkt.clouddn.com/liushujuyichang.png",
       "openType": 2,
-      "level": 2,
-      "isNecessary": true,
-      "parentId": 23,
-      "order": 4,
       "extend": false,
       "childs": null,
-      "id": 19
+      "id": 58
+    }
+    ,
+    {
+      "title": "流数据聚类",
+      "pageURL": "demo/streamCluster",
+      "name": "流数据聚类",
+      "icon": "http://puq7bvxwj.bkt.clouddn.com/liujulei.png",
+      "openType": 2,
+      "extend": false,
+      "childs": null,
+      "id": 5801
+    }
+     ,
+    {
+      "title": "多视角数据",
+      "pageURL": "demo/multiview",
+      "name": "多视角数据",
+      "icon": "http://puq7bvxwj.bkt.clouddn.com/multiviewclustering.png",
+      "openType": 2,
+      "extend": false,
+      "childs": null,
+      "id": 5802
+    }
+      ],
+      "id": 23
     },
     {
-      "title": "角色管理",
-      "pageURL": "/role/index",
-      "name": "角色管理",
-      "icon": "fa-th-large",
+      "title": "网络传感",
+      "pageURL": null,
+      "name": "网络传感",
+      "icon": "fa-user",
+      "openType": 1,
+      "extend": false,
+      "childs": [
+        {
+      "title": "基于社区发现的谣言预测",
+      "pageURL": "demo/comRumor",
+      "name": "基于社区发现的谣言预测",
+       "icon": "http://puq7bvxwj.bkt.clouddn.com/yaoyan.png",
       "openType": 2,
-      "level": 2,
-      "isNecessary": true,
-      "parentId": 23,
-      "order": 5,
+      "extend": false,
+      "childs": null,
+      "id": 3
+    },
+    {
+      "title": "DeepHawkes",
+      "pageURL": "demo/DeepHawkes",
+      "name": "DeepHawkes",
+       "icon": "http://puq7bvxwj.bkt.clouddn.com/infodiffusion.png",
+      "openType": 2,
+      "extend": false,
+      "childs": null,
+      "id": 4
+    },
+    {
+      "title": "结构洞挖掘",
+      "pageURL": "demo/structureHole",
+      "name": "结构洞挖掘",
+       "icon": "http://puq7bvxwj.bkt.clouddn.com/jiegoudong.png",
+      "openType": 2,
       "extend": false,
       "childs": null,
       "id": 22
     },
     {
-      "title": "系统设置",
-      "pageURL": null,
-      "name": "系统设置",
-      "icon": "fa-cog",
+      "title": "Network Embedding",
+      "pageURL": "demo/NetworkEmbedding",
+      "name": "Network Embedding",
+      "icon": "http://puq7bvxwj.bkt.clouddn.com/huangtong.png",
       "openType": 2,
-      "level": 1,
-      "isNecessary": true,
-      "parentId": 0,
-      "order": 98,
       "extend": false,
       "childs": null,
-      "id": 23
+      "id": 60
     },
     {
-      "title": "Font Awesome图标展示",
-      "pageURL": null,
-      "name": "Font Awesome图标展示",
-      "icon": "fa-user",
+      "title": "基于原路径的异质网络发现",
+      "pageURL": "demo/meathPath",
+      "name": "基于原路径的异质网络发现",
+       "icon": "http://puq7bvxwj.bkt.clouddn.com/yangyudi.png",
       "openType": 2,
-      "level": 1,
-      "isNecessary": true,
-      "parentId": 0,
-      "order": 99,
       "extend": false,
       "childs": null,
+      "id": 62
+    },
+    {
+      "title": "重叠社区发现",
+      "pageURL": "demo/overlapDetec",
+      "name": "重叠社区发现",
+      "icon": "http://puq7bvxwj.bkt.clouddn.com/wuqingqing.png",
+      "openType": 2,
+      "extend": false,
+      "childs": null,
+      "id": 57
+    }
+      ],
       "id": 27
-    },
-    {
-      "title": "图片",
-      "pageURL": null,
-      "name": "图片",
-      "icon": "fa-photo",
-      "openType": 2,
-      "level": 0,
-      "isNecessary": true,
-      "parentId": 27,
-      "order": 99,
-      "extend": false,
-      "childs": null,
-      "id": 28
-    },
-    {
-      "title": "书签",
-      "pageURL": null,
-      "name": "书签",
-      "icon": "fa-bookmark",
-      "openType": 2,
-      "level": 0,
-      "isNecessary": true,
-      "parentId": 27,
-      "order": 99,
-      "extend": false,
-      "childs": null,
-      "id": 29
     }
   ]
 }

@@ -14,7 +14,7 @@
       "title": "流数据异常检测",
       "pageURL": "demo/streamOutlier",
       "name": "流数据异常检测",
-      "icon": "fa-bar-chart",
+      "icon": "http://puq7bvxwj.bkt.clouddn.com/liushujuyichang.png",
       "openType": 2,
       "extend": false,
       "childs": null,
@@ -25,7 +25,7 @@
       "title": "流数据聚类",
       "pageURL": "demo/streamCluster",
       "name": "流数据聚类",
-      "icon": "fa-bar-chart",
+      "icon": "http://puq7bvxwj.bkt.clouddn.com/liujulei.png",
       "openType": 2,
       "extend": false,
       "childs": null,
@@ -36,7 +36,7 @@
       "title": "多视角数据",
       "pageURL": "demo/multiview",
       "name": "多视角数据",
-      "icon": "http://puq7bvxwj.bkt.clouddn.com/logo1.png",
+      "icon": "http://puq7bvxwj.bkt.clouddn.com/multiviewclustering.png",
       "openType": 2,
       "extend": false,
       "childs": null,
@@ -46,18 +46,18 @@
       "id": 23
     },
     {
-      "title": "Font Awesome图标展示",
+      "title": "网络传感",
       "pageURL": null,
-      "name": "Font Awesome图标展示",
+      "name": "网络传感",
       "icon": "fa-user",
       "openType": 1,
       "extend": false,
       "childs": [
-         {
+        {
       "title": "基于社区发现的谣言预测",
       "pageURL": "demo/comRumor",
       "name": "基于社区发现的谣言预测",
-       "icon": "http://puq7bvxwj.bkt.clouddn.com/logo1.png",
+       "icon": "http://puq7bvxwj.bkt.clouddn.com/yaoyan.png",
       "openType": 2,
       "extend": false,
       "childs": null,
@@ -67,7 +67,7 @@
       "title": "DeepHawkes",
       "pageURL": "demo/DeepHawkes",
       "name": "DeepHawkes",
-       "icon": "http://puq7bvxwj.bkt.clouddn.com/logo1.png",
+       "icon": "http://puq7bvxwj.bkt.clouddn.com/infodiffusion.png",
       "openType": 2,
       "extend": false,
       "childs": null,
@@ -77,7 +77,7 @@
       "title": "结构洞挖掘",
       "pageURL": "demo/structureHole",
       "name": "结构洞挖掘",
-       "icon": "http://puq7bvxwj.bkt.clouddn.com/logo1.png",
+       "icon": "http://puq7bvxwj.bkt.clouddn.com/jiegoudong.png",
       "openType": 2,
       "extend": false,
       "childs": null,
@@ -87,7 +87,7 @@
       "title": "Network Embedding",
       "pageURL": "demo/NetworkEmbedding",
       "name": "Network Embedding",
-      "icon": "http://puq7bvxwj.bkt.clouddn.com/logo1.png",
+      "icon": "http://puq7bvxwj.bkt.clouddn.com/huangtong.png",
       "openType": 2,
       "extend": false,
       "childs": null,
@@ -97,7 +97,7 @@
       "title": "基于原路径的异质网络发现",
       "pageURL": "demo/meathPath",
       "name": "基于原路径的异质网络发现",
-       "icon": "http://puq7bvxwj.bkt.clouddn.com/logo1.png",
+       "icon": "http://puq7bvxwj.bkt.clouddn.com/yangyudi.png",
       "openType": 2,
       "extend": false,
       "childs": null,
@@ -107,7 +107,7 @@
       "title": "重叠社区发现",
       "pageURL": "demo/overlapDetec",
       "name": "重叠社区发现",
-      "icon": "http://www.layui.com/favicon.ico",
+      "icon": "http://puq7bvxwj.bkt.clouddn.com/wuqingqing.png",
       "openType": 2,
       "extend": false,
       "childs": null,
@@ -115,107 +115,6 @@
     }
       ],
       "id": 27
-    },
-    {
-      "title": "Font Awesome第三方LOGO",
-      "pageURL": null,
-      "name": "Font Awesome第三方LOGO",
-      "icon": "fa-edge",
-      "openType": 1,
-      "extend": false,
-      "childs": [
-        {
-          "title": "苹果",
-          "pageURL": null,
-          "name": "苹果",
-          "icon": "fa-apple",
-          "openType": 1,
-          "extend": false,
-          "childs": null,
-          "id": 44
-        },
-        {
-          "title": "Google Chrome",
-          "pageURL": null,
-          "name": "Google Chrome",
-          "icon": "fa-chrome",
-          "openType": 1,
-          "extend": false,
-          "childs": null,
-          "id": 45
-        },
-        {
-          "title": "Microsoft Edge",
-          "pageURL": null,
-          "name": "Microsoft Edge",
-          "icon": "fa-edge",
-          "openType": 1,
-          "extend": false,
-          "childs": null,
-          "id": 46
-        },
-        {
-          "title": "腾讯QQ",
-          "pageURL": null,
-          "name": "腾讯QQ",
-          "icon": "fa-qq",
-          "openType": 1,
-          "extend": false,
-          "childs": null,
-          "id": 47
-        },
-        {
-          "title": "新浪微博",
-          "pageURL": null,
-          "name": "新浪微博",
-          "icon": "fa-weibo",
-          "openType": 1,
-          "extend": false,
-          "childs": null,
-          "id": 48
-        },
-        {
-          "title": "Microsoft Windows",
-          "pageURL": null,
-          "name": "Microsoft Windows",
-          "icon": "fa-windows",
-          "openType": 1,
-          "extend": false,
-          "childs": null,
-          "id": 49
-        },
-        {
-          "title": "微信",
-          "pageURL": null,
-          "name": "微信",
-          "icon": "fa-wechat",
-          "openType": 1,
-          "extend": false,
-          "childs": null,
-          "id": 50
-        },
-        {
-          "title": "Skype",
-          "pageURL": null,
-          "name": "Skype",
-          "icon": "fa-skype",
-          "openType": 1,
-          "extend": false,
-          "childs": null,
-          "id": 51
-        },
-        {
-          "title": "Github",
-          "pageURL": null,
-          "name": "Github",
-          "icon": "fa-github",
-          "openType": 1,
-          "extend": false,
-          "childs": null,
-          "id": 52
-        }
-      ],
-      "id": 43
     }
   ]
 }

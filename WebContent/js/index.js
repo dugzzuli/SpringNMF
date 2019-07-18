@@ -25,7 +25,7 @@
             settings: layui.data('winui').settings || {
                 color: 32,
                 taskbarMode: 'bottom',
-                startSize: 'sm',
+                startSize: 'md',
                 bgSrc: 'images/bg_01.jpg',
                 lockBgSrc: 'images/bg_04.jpg'
             },  //如果本地配置为空则给默认值
@@ -35,6 +35,7 @@
                     desktopApp.ondblclick(function (id, elem) {
                         OpenWindow(elem);
                     });
+                    
                     desktopApp.contextmenu({
                         item: ["打开", "删除", '右键菜单可自定义'],
                         item1: function (id, elem) {
@@ -54,7 +55,7 @@
             },
             menu: {
                 options: {
-                    url: 'json/allmenu.json',
+                    url: 'lib/json/allmenu.json',
                     method: 'get',
                     data: { nihaoa: '' }
                 },
@@ -186,6 +187,8 @@
         winui.window.confirm('确认注销吗?', { icon: 3, title: '提示' }, function (index) {
             winui.window.msg('执行注销操作，返回登录界面');
             layer.close(index);
+            $(window).attr('location','demo/login');
+            
         });
     });
 
@@ -217,12 +220,6 @@
                     return false;
                 }
             });
-        }
-    }, {
-        tips: '切换壁纸',
-        icon: 'fa-television',
-        click: function (e) {
-            layer.msg('这个是自定义的工具栏', { zIndex: layer.zIndex });
         }
     }]);
 

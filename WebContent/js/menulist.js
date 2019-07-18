@@ -17,7 +17,7 @@ layui.config({
     table.render({
         id: tableId,
         elem: '#menu',
-        url: '../../json/menulist.json',
+        url: '../../lib/json/menulist.json',
         //height: 'full-65', //自适应高度
         //size: '',   //表格尺寸，可选值sm lg
         //skin: '',   //边框风格，可选值line row nob
