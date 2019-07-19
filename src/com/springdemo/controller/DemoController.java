@@ -125,6 +125,21 @@ public class DemoController {
 	
 	
 	
+	@RequestMapping("/allyangxiao")
+	public String allyangxiao() {
+		
+		return "allyangxiao";
+	}
+	
+	@RequestMapping("/yangxiao")
+	public String yangxiao() {
+		
+		return "yangxiao";
+	}
+	
+	
+	
+	
 	
 	
 	

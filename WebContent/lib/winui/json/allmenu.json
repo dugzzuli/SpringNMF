@@ -2,6 +2,28 @@
   "code": 1,
   "message": "成功",
   "data": [
+  {
+      "title": "系统介绍",
+      "pageURL": "views/demo/introduce.html",
+      "name": "系统介绍",
+      "icon": "fa-info-circle",
+      "openType": 2,
+      "maxOpen": -1,
+      "extend": false,
+      "childs": null,
+      "id": 4
+    },
+    {
+      "title": "系统菜单",
+      "pageURL": "views/menu/list_iframe.html",
+      "name": "系统菜单",
+      "icon": "fa-navicon",
+      "openType": 2,
+      "maxOpen": -1,
+      "extend": false,
+      "childs": null,
+      "id": 2
+    },
     {
       "title": "社会传感",
       "pageURL": null,
@@ -19,6 +41,16 @@
       "extend": false,
       "childs": null,
       "id": 58
+    } ,
+    {
+      "title": "基于情感分析时空事件预测",
+      "pageURL": "demo/allyangxiao",
+      "name": "基于情感分析时空事件预测",
+      "icon": "http://puq7bvxwj.bkt.clouddn.com/multiviewclustering.png",
+      "openType": 2,
+      "extend": false,
+      "childs": null,
+      "id": 5803
     }
     ,
     {
