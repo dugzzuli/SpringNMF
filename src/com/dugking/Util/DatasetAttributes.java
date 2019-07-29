@@ -24,6 +24,12 @@ public class DatasetAttributes {
 			model.setClusterNum(10);
 			model.setSamples(2000);
 		}
+		else if (datasetName.equals("LP1")) {
+			model.setDesc("All features are numeric although they are integer valued only. Each feature represents a force or a torque measured after failure detection; each failure instance is characterized in terms of 15 force/torque samples collected at regular time intervals starting immediately after failure detection; The total observation window for each failure instance was of 315 ms. ");
+			model.setUrl("http://archive.ics.uci.edu/ml/datasets/Robot+Execution+Failures");
+			model.setClusterNum(4);
+			model.setSamples(88);
+		}
 		else{
 			model.setDesc("未输入数据集名称....");
 			model.setUrl(".....");

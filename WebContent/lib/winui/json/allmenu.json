@@ -43,9 +43,9 @@
       "id": 58
     } ,
     {
-      "title": "基于情感分析时空事件预测",
+      "title": "基于情感度的多分辨率空间事件预测",
       "pageURL": "demo/allyangxiao",
-      "name": "基于情感分析时空事件预测",
+      "name": "基于情感度的多分辨率空间事件预测",
       "icon": "http://puq7bvxwj.bkt.clouddn.com/yangxiao.png",
       "openType": 2,
       "extend": false,
@@ -73,6 +73,16 @@
       "extend": false,
       "childs": null,
       "id": 5802
+    },
+    {
+      "title": "基于时间标签的流行社交位置发现",
+      "pageURL": "demo/sociallocation",
+      "name": "基于时间标签的流行社交位置发现",
+      "icon": "http://puq7bvxwj.bkt.clouddn.com/liuchangyun.png",
+      "openType": 2,
+      "extend": false,
+      "childs": null,
+      "id": 5
     }
       ],
       "id": 23
@@ -86,9 +96,9 @@
       "extend": false,
       "childs": [
         {
-      "title": "基于社区发现的谣言预测",
+      "title": "基于社区发现的动态谣言影响最小化",
       "pageURL": "demo/comRumor",
-      "name": "基于社区发现的谣言预测",
+      "name": "基于社区发现的动态谣言影响最小化",
        "icon": "http://puq7bvxwj.bkt.clouddn.com/yaoyan.png",
       "openType": 2,
       "extend": false,
@@ -96,9 +106,9 @@
       "id": 3
     },
     {
-      "title": "DeepHawkes",
+      "title": "基于主题的的微博转发流行度预测",
       "pageURL": "demo/DeepHawkes",
-      "name": "DeepHawkes",
+      "name": "基于主题的的微博转发流行度预测",
        "icon": "http://puq7bvxwj.bkt.clouddn.com/infodiffusion.png",
       "openType": 2,
       "extend": false,
@@ -106,9 +116,9 @@
       "id": 4
     },
     {
-      "title": "结构洞挖掘",
+      "title": "基于元路径加权的结构洞挖掘",
       "pageURL": "demo/structureHole",
-      "name": "结构洞挖掘",
+      "name": "基于元路径加权的结构洞挖掘",
        "icon": "http://puq7bvxwj.bkt.clouddn.com/jiegoudong.png",
       "openType": 2,
       "extend": false,
@@ -116,9 +126,9 @@
       "id": 22
     },
     {
-      "title": "Network Embedding",
+      "title": "基于社区的网络嵌入的表征学习",
       "pageURL": "demo/NetworkEmbedding",
-      "name": "Network Embedding",
+      "name": "基于社区的网络嵌入的表征学习",
       "icon": "http://puq7bvxwj.bkt.clouddn.com/huangtong.png",
       "openType": 2,
       "extend": false,
@@ -126,9 +136,9 @@
       "id": 60
     },
     {
-      "title": "基于原路径的异质网络发现",
+      "title": "基于元路径发现的异质网络研究",
       "pageURL": "demo/meathPath",
-      "name": "基于原路径的异质网络发现",
+      "name": "基于元路径发现的异质网络研究",
        "icon": "http://puq7bvxwj.bkt.clouddn.com/yangyudi.png",
       "openType": 2,
       "extend": false,
@@ -136,9 +146,9 @@
       "id": 62
     },
     {
-      "title": "重叠社区发现",
+      "title": "基于社区亲密度的影响力研究",
       "pageURL": "demo/overlapDetec",
-      "name": "重叠社区发现",
+      "name": "基于社区亲密度的影响力研究",
       "icon": "http://puq7bvxwj.bkt.clouddn.com/wuqingqing.png",
       "openType": 2,
       "extend": false,

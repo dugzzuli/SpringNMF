@@ -58,39 +58,7 @@
                         <div class="winui-tilebox-body">
                             <div class="winui-tile winui-tile-normal">
                                 <i class="fa fa-fw fa-adjust"></i>
-                                <span>按钮</span>
-                            </div>
-                            <div class="winui-tile winui-tile-normal">
-                                <i class="fa fa-fw fa-circle-o-notch"></i>
-                                <span>进度条</span>
-                            </div>
-                            <div class="winui-tile winui-tile-normal">
-                                <i class="fa fa-fw fa-list-alt"></i>
-                                <span>表单</span>
-                            </div>
-                            <div class="winui-tile winui-tile-normal">
-                                <i class="fa fa-fw fa-window-maximize"></i>
-                                <span>面板</span>
-                            </div>
-                            <div class="winui-tile winui-tile-long">
-                                <p style="font-size:30px;font-family:'STKaiti';">Tab</p>
-                                <span>选项卡</span>
-                            </div>
-                            <div class="winui-tile winui-tile-long">
-                                <i class="fa fa-fw fa-spin fa-spinner"></i>
-                                <span>流加载</span>
-                            </div>
-                            <div class="winui-tile winui-tile-normal">
-                                <i class="fa fa-fw fa-spin fa-refresh"></i>
-                                <span>动画</span>
-                            </div>
-                            <div class="winui-tile winui-tile-normal">
-                                <i class="fa fa-fw fa-calendar"></i>
-                                <span>日期时间</span>
-                            </div>
-                            <div class="winui-tile winui-tile-long">
-                                <i class="fa fa-fw fa-clock-o"></i>
-                                <span>时间线</span>
+                                <span>人造网络生成</span>
                             </div>
                         </div>
                     </div>

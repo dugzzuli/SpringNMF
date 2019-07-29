@@ -24,6 +24,12 @@
 						<option value="3sources">3sources</option>
 						<option value="BBCSport">BBCSport</option>
 						<option value="HW2sources">HW2sources</option>
+						<option value="LP1">LP1</option>
+						<option value="LP2">LP2</option>
+						<option value="LP3">LP3</option>
+						<option value="LP4">LP4</option>
+						<option value="LP5">LP5</option>
+						
 
 					</select>
 				</div>
@@ -161,7 +167,7 @@ var getting = {
         dataType:'json',
         success:function(res) {
           $('#result').html(res.desc);
-          idTime=setTimeout(function(){$.ajax(getting);},1000);//1秒后定时发送请求
+          /* idTime=setTimeout(function(){$.ajax(getting);},1000);//1秒后定时发送请求 */
         }
 };
 
@@ -184,13 +190,13 @@ function showModal(){
 			contentType : 'application/json;charset=utf-8',
 			beforeSend : function() {
 				showModal();
-				window.setInterval(function(){$.ajax(getting)},3000);
+				window.setTimeout(function(){$.ajax(getting)},3000);
 			},
 			//请求成功后的回调函数
 			success : function(data) {
 				setTimeout(hideModal(),1000);
 				
-				window.clearTimeout(idTime);
+				/* window.clearTimeout(idTime); */
 				
 				drawChart(data);
 				

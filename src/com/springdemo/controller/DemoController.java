@@ -123,27 +123,16 @@ public class DemoController {
 		return "comRumor";
 	}
 	
-	
-	
 	@RequestMapping("/allyangxiao")
 	public String allyangxiao() {
 		
 		return "allyangxiao";
 	}
-	
-	@RequestMapping("/yangxiao")
-	public String yangxiao() {
-		
-		return "yangxiao";
+	@RequestMapping("/sociallocation")
+	public ModelAndView sociallocation(){
+		ModelAndView model = new ModelAndView("sociallocation");
+		return model;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	@RequestMapping(value = "/showdatasetsDetails", method = RequestMethod.GET)
 	public @ResponseBody DatasetsAttr showdatasetsDetails(String datasetName) {
@@ -248,12 +237,6 @@ public class DemoController {
 					Math.pow(0.1, model.getRelarErr()), 1);
 			model2.update();
 
-			// GMNMF modelGMNMF= new GMNMF(listV,
-			// Integer.valueOf(model.getMaxIter()), model.getClusterNum(),
-			// Math.pow(0.1, 10), Math.pow(0.1, model.getRelarErr()), 1,
-			// model.getAplpha());
-			// modelGMNMF.update();
-
 			String serModel =request.getServletContext().getRealPath("/model");
 
 			SerizelizeModel.serlizeModel(model2, serModel +"model.model");
@@ -319,6 +302,7 @@ public class DemoController {
 			System.out.println("MNMF");
 			session.setAttribute("statusCur", "分解完成！");
 			return json;
+			
 		} else if (model.getMethod().equals("GMNMF")) {
 			Map<String, ArrayList<double[][]>> listLabel = FileUtil.getMatCell2ArrayList(datasetPath + datasetName,
 					"truelabel");
@@ -406,7 +390,7 @@ public class DemoController {
 
 	}
 
-	@RequestMapping(value = "/getJsonCluster", method = RequestMethod.GET)
+	@RequestMapping(value = "/getJsonCluster", method = RequestMethod.POST)
 	public @ResponseBody ClusterModel getJsonCluster(GetMethodParam model, HttpServletRequest request) {
 		String serModel = request.getServletContext().getRealPath("/model");
 		System.out.println(request.getServletContext().getRealPath("/model"));

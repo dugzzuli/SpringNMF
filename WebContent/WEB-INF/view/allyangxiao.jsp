@@ -14,7 +14,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>多视角聚类分析</title>
+    <title>灾害预测</title>
     <%--  <base href="<%=basePath%>"> --%>
     <link href="<%=basePath%>lib/layui/css/layui.css" rel="stylesheet" />
     <link href="<%=basePath%>lib/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -37,8 +37,9 @@
             <div class="winui-scroll-y" style="height:auto;position:absolute;top:0;bottom:0;">
                 <ul class="winui-tab-nav">
                     <li class="winui-this"><i class="fa fa-info-circle fa-fw"></i>数据集</li>
-                    <li><i class="fa fa-clock-o fa-fw"></i>多视角聚类</li>
-                    <li><i class="fa fa-bug fa-fw"></i>可视化</li>
+                    <li><i class="fa fa-clock-o fa-fw"></i>灾害预测</li>
+                    <li><i class="fa fa-clock-o fa-fw"></i>真实结果展示</li>
+                   
                 </ul>
             </div>
         </div>
@@ -46,14 +47,15 @@
             <div class="winui-scroll-y">
                 <div class="winui-tab-content">
                     <div class="winui-tab-item layui-show">
-                       <iframe src="http://localhost:8080/SpringNMF/demo/yangxiao" frameborder=0 style="width:100%; height:500px;" ></iframe>
+                       <iframe src="http://127.0.0.1:8082/showDatasets" frameborder=0 style="width:100%; height:800px;"></iframe>
                     </div>
                     <div class="winui-tab-item">
-                        <iframe src="http://localhost:8080/SpringNMF/demo/showDataAnalysis" frameborder=0 style="width:100%; height:700px;"></iframe>
+                        <iframe src="http://127.0.0.1:8082/chinaarea" frameborder=0 style="width:100%; height:800px;"></iframe>
                     </div>
-                    <div class="winui-tab-item">
-                       <iframe src="http://localhost:8080/SpringNMF/demo/showCluster" frameborder=0 style="width:100%; height:700px;"></iframe>
+                     <div class="winui-tab-item">
+                        <iframe src="http://127.0.0.1:8082/truellabel" frameborder=0 style="width:100%; height:800px;"></iframe>
                     </div>
+                   
                 </div>
             </div>
         </div>
