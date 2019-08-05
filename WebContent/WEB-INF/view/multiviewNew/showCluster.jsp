@@ -140,6 +140,49 @@ function initEmbedding() {
 	var div = d3.select("#embed");
 	svg = div.append("svg") // svg is global
 	.attr("width", $(document.body).width() - 50).attr("height", 500);
+	
+	
+	
+	
+	
+}
+
+function initEmbedding2(nodes,links) {
+	
+	var force = d3.layout.force() //layout将json格式转化为力学图可用的格式
+	.nodes(d3.values(nodes)) //设定节点数组
+	.links(links) //设定连线数组
+	.size([width, height]) //作用域的大小
+	.linkDistance(120) //连接线长度
+	.charge(-1500) //顶点的电荷数。该参数决定是排斥还是吸引，数值越小越互相排斥
+	.on("tick", tick) //指时间间隔，隔一段时间刷新一次画面
+	.start(); //开始转换
+	
+	var drag = force.drag()
+	.on("dragstart", dragstart)
+	.on("dragend", dragend);
+	
+	
+	
+}
+
+
+function dragstart(d) {
+	d3.event.sourceEvent.stopPropagation();
+	d3.select(this).classed("fixed", d.fixed = true);
+}
+
+function dragend(d) {
+	d3.event.sourceEvent.stopPropagation();
+	d3.select(this).classed("fixed", d.fixed = true);
+}
+//设置圆圈和文字的坐标
+function transform1(d) {
+	return "translate(" + d.x + "," + d.y + ")";
+}
+
+function transform2(d) {
+	return "translate(" + (d.x) + "," + d.y + ")";
 }
 
 var gs;
@@ -152,6 +195,8 @@ var colorData = [ "#3366cc", "#dc3912", "#ff9900", "#109618", "#990099",
 
 function drawEmbedding() {
 
+	
+	
 	gs = svg.selectAll(".b").data(data).enter().append("g").attr("class", "u");
 
 	cs = gs.append("circle").attr("cx", 0).attr("cy", 0).attr("r", 5).attr(
@@ -160,6 +205,7 @@ function drawEmbedding() {
 				console.log(d, i);
 				return colorData[i % colorData.length];
 			});
+	
 	/* 'rgb(100,100,255)' */
 
 	if (labels.length > 0) {

@@ -160,6 +160,7 @@ public class DemoController {
 		ModelAndView model = new ModelAndView("showSingleView/showSingleDataAnalysis");
 		return model;
 	}
+
 	@RequestMapping("/showSingleCluster")
 	public ModelAndView showSingleCluster() {
 		ModelAndView model = new ModelAndView("showSingleView/showSingleCluster");
@@ -167,14 +168,13 @@ public class DemoController {
 	}
 	// 单视角聚类 控制器 结束.....
 
-	
 	// 多视角控制器开始
 	@RequestMapping("/showMultiview")
 	public ModelAndView multiview() {
 		ModelAndView model = new ModelAndView("multiviewNew/showMultiview");
 		return model;
 	}
-	
+
 	@RequestMapping("/showCluster")
 	public ModelAndView showCluster() {
 		ModelAndView model = new ModelAndView("multiviewNew/showCluster");
@@ -277,10 +277,6 @@ public class DemoController {
 		return ModelList;
 
 	}
-
-
-
-	
 
 	@RequestMapping("/showDataAnalysis")
 	public ModelAndView showDataAnalysis() {
@@ -385,14 +381,20 @@ public class DemoController {
 			legend.setBorderWidth(1);
 			legend.setVerticalAlign("middle");
 			json.setLengend(legend);
+			
 			int[] arrLabel = ListUnion.getDouble2Int(label);
 			GlobalData.labelData = arrLabel;
 			model2.getClusterLabel(model2.getW());
 
+			String sb = getOutputSb(model2.getLabelCluster(), arrLabel, clusterNum);
+			
+			json.setClusterResult(sb.toString());
+			
 			System.out.println(ClusterEvaluation.NMI(model2.getLabelCluster(), arrLabel));
 			System.out.println(ClusterEvaluation.Purity(model2.getLabelCluster(), arrLabel));
 			System.out.println("MNMF");
 			session.setAttribute("statusCur", "分解完成！");
+
 			return json;
 
 		} else if (model.getMethod().equals("GMNMF")) {
@@ -465,6 +467,9 @@ public class DemoController {
 			GlobalData.labelData = arrLabel;
 			model2.getClusterLabel(model2.getW());
 
+			
+			String sb = getOutputSb(model2.getLabelCluster(), arrLabel, clusterNum);
+			json.setClusterResult(sb.toString());
 			System.out.println(ClusterEvaluation.NMI(model2.getLabelCluster(), arrLabel));
 			System.out.println(ClusterEvaluation.Purity(model2.getLabelCluster(), arrLabel));
 			System.out.println("GMNMF");
@@ -473,6 +478,27 @@ public class DemoController {
 		}
 		return null;
 
+	}
+
+	private String getOutputSb(int[] labelCluster, int[] arrLabel, int clusterNum) {
+		ArrayList<StringBuffer> arr = new ArrayList<StringBuffer>();
+		StringBuffer sb = new StringBuffer();
+		for (int i = 1; i <= clusterNum; i++) {
+			sb = new StringBuffer();
+			sb.append("第"+i+"簇包含的样本为: ");
+			for (int j = 0; j < labelCluster.length; j++) {
+					if(labelCluster[j]==i-1){
+						sb.append((j+1)+" ");
+					}
+			}
+			sb.append("\n");
+			arr.add(sb);
+		}
+		StringBuffer sbArr=new StringBuffer();
+		for (StringBuffer stringBuffer : arr) {
+			sbArr.append(stringBuffer.toString());
+		}
+		return sbArr.toString();
 	}
 
 	@RequestMapping(value = "/getJsonCluster", method = RequestMethod.POST)
@@ -489,7 +515,7 @@ public class DemoController {
 	// 多视角控制器 结束
 
 	// 单视角聚类控制器
-	
+
 	@RequestMapping(value = "/getSingleJsonCluster", method = RequestMethod.POST)
 	public @ResponseBody ClusterModel getSingleJsonCluster(GetMethodParam model, HttpServletRequest request) {
 		String serModel = request.getServletContext().getRealPath("/model");
@@ -502,11 +528,11 @@ public class DemoController {
 		json.setLabel(GlobalData.labelData);
 		return json;
 	}
-	
+
 	@RequestMapping(value = "/getSVCLuster")
 	public @ResponseBody JsonQXChart getSVCLuster(GetMethodParamGNMF model, HttpServletRequest request) {
 
-//		MultiViewData modelDataSet = MultiViewData.getInstance(fileUrPath);
+		// MultiViewData modelDataSet = MultiViewData.getInstance(fileUrPath);
 		// 用来保存当前状态....
 		HttpSession session = request.getSession();
 		session.setAttribute("statusCur", "开始执行.....");
@@ -524,20 +550,19 @@ public class DemoController {
 			session.setAttribute("statusCur", "正在处理数据.....");
 		}
 		session.setAttribute("statusCur", "正在分解.....");
-		
+
 		Map<String, ArrayList<double[][]>> listLabel = FileUtil.getMatCell2ArrayList(fileUrPath, "truelabel");
 		double[][] label = listLabel.get("truelabel").get(0);
 		int clusterNum = ListUnion.getCluster(label);
 		model.setClusterNum(clusterNum);
-		
+
 		LaplanceDug eigenmap = new LaplanceDug(listV.get(0).getArray(), 5, 0.5, GraphType.Binary);
 		Matrix d = eigenmap.getdDug();
 		Matrix w = eigenmap.getwDug();
-		
-		Single_GNMF modelGNMF = new Single_GNMF(listV.get(0).transpose(), model.getMaxIter(), model.getClusterNum(),
-		Math.pow(0.1, 10), Math.pow(0.1, 10), model.getAlpha(), d, w);
-		modelGNMF.update();
 
+		Single_GNMF modelGNMF = new Single_GNMF(listV.get(0).transpose(), model.getMaxIter(), model.getClusterNum(),
+				Math.pow(0.1, 10), Math.pow(0.1, 10), model.getAlpha(), d, w);
+		modelGNMF.update();
 
 		String serModel = request.getServletContext().getRealPath("/model");
 

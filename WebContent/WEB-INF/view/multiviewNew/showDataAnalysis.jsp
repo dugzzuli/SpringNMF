@@ -69,7 +69,7 @@
 									</h3>
 								</div>
 								<div class="panel-body" id="leftPanel" >
-									<textarea class="form-control" 
+									<textarea class="form-control" id="resultMNMF"
 										rows="19" style="background-color:white; min-width: 100%; border:none;" readonly></textarea>
 								</div>
 
@@ -284,6 +284,8 @@ var getting = {
 		json.series = series;
 
 		$('#container').highcharts(json);
+		
+		$("#resultMNMF").text(data["clusterResult"]);
 	}
 
 	$(document).ready(

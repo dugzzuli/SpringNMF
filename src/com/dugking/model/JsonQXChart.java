@@ -11,6 +11,8 @@ public class JsonQXChart {
 	// json.tooltip = tooltip;
 	// json.legend = legend;
 	// json.series = series;
+	
+	public String clusterResult;
 	private Map<String,String> title;
 	private Tootip tootip;
 	public Tootip getTootip() {
@@ -60,6 +62,13 @@ public class JsonQXChart {
 	public void setyAxis(YAxis yAxis) {
 		this.yAxis = yAxis;
 	}
+	public String getClusterResult() {
+		return clusterResult;
+	}
+	public void setClusterResult(String clusterResult) {
+		this.clusterResult = clusterResult;
+	}
+	
 
 	
 
