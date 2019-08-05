@@ -38,7 +38,7 @@
                 <ul class="winui-tab-nav">
                     <li class="winui-this"><i class="fa fa-info-circle fa-fw"></i>数据集</li>
                     <li><i class="fa fa-clock-o fa-fw"></i>多视角聚类</li>
-                    <li><i class="fa fa-bug fa-fw"></i>可视化</li>
+                    <li><i class="fa fa-bug fa-fw"></i>聚类可视化</li>
                 </ul>
             </div>
         </div>
@@ -46,13 +46,13 @@
             <div class="winui-scroll-y">
                 <div class="winui-tab-content">
                     <div class="winui-tab-item layui-show">
-                       <iframe src="http://localhost:8080/SpringNMF/demo/showdatasets" frameborder=0 style="width:1000px; height:1000px;"></iframe>
+                       <iframe src="http://localhost:8080/SpringNMF/demo/showdatasetsDetail" frameborder=0 style="width:100%; height:700px;"></iframe>
                     </div>
                     <div class="winui-tab-item">
-                        <iframe src="http://localhost:8080/SpringNMF/demo/showDataAnalysis" frameborder=0 style="width:1000px; height:1000px;"></iframe>
+                        <iframe src="http://localhost:8080/SpringNMF/demo/showDataAnalysis" frameborder=0 style="width:100%; height:1000px;"></iframe>
                     </div>
                     <div class="winui-tab-item">
-                       <iframe src="http://localhost:8080/SpringNMF/demo/showCluster" frameborder=0 style="width:1000px; height:1000px;"></iframe>
+                       <iframe src="http://localhost:8080/SpringNMF/demo/showCluster" frameborder=0 style="width:100%; height:1000px;"></iframe>
                     </div>
                 </div>
             </div>

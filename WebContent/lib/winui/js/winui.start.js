@@ -1,9 +1,9 @@
 ﻿/**
-
- @Name：winui.start 开始菜单模块
- @Author：Leo
- @License：MIT
-    
+ * 
+ * @Name：winui.start 开始菜单模块
+ * @Author：Leo
+ * @License：MIT
+ * 
  */
 layui.define(['jquery', 'element', 'layer', 'winui'], function (exports) {
     "use strict";
@@ -11,7 +11,7 @@ layui.define(['jquery', 'element', 'layer', 'winui'], function (exports) {
     var $ = layui.jquery,
         element = layui.element;;
 
-    //开始菜单构造函数
+    // 开始菜单构造函数
     var Menu = function (options) {
         this.options = options || {
             url: 'json/allmenu.json',
@@ -19,8 +19,8 @@ layui.define(['jquery', 'element', 'layer', 'winui'], function (exports) {
         };
         this.data = null;
     };
-
-    //渲染HTML
+    
+    // 渲染HTML
     Menu.prototype.render = function (callback) {
         if (this.data === null) return;
         var html = '';
@@ -33,7 +33,7 @@ layui.define(['jquery', 'element', 'layer', 'winui'], function (exports) {
                 winIcon = (item.icon == '' || item.icon == undefined) ? '' : 'win-icon="' + item.icon + '"',
                 extend = item.extend ? ' layui-nav-itemed' : '',
                 isParent = item.childs ? ' parent' : '',
-                //icon的算法存在纰漏，但出现错误几率较小
+                // icon的算法存在纰漏，但出现错误几率较小
                 icon = (item.icon.indexOf('fa-') != -1 && item.icon.indexOf('.') == -1) ? '<i class="fa ' + item.icon + ' fa-fw"></i>' : '<img src="' + item.icon + '" />';
             html += '<li class="layui-nav-item ' + isParent + ' ' + extend + '" ' + id + ' ' + url + ' ' + title + ' ' + opentype + ' ' + maxopen + ' ' + winIcon + '>';
             html += '<a><div class="winui-menu-icon">'
@@ -41,10 +41,12 @@ layui.define(['jquery', 'element', 'layer', 'winui'], function (exports) {
             html += '</div>';
             html += '<span class="winui-menu-name">' + item.name + '</span></a>';
             if (item.childs) {
-                html += '<dl class="layui-nav-child">';
+                html += '<dl class="layui-nav-child" >';
                 $(item.childs).each(function (cIndex, cItem) {
                     var cId = (cItem.id == '' || cItem.id == undefined) ? '' : 'win-id="' + cItem.id + '"',
-                        cUrl = (cItem.pageURL == '' || cItem.pageURL == undefined) ? '' : 'win-url="' + cItem.pageURL + '"',
+							 cUrl = (cItem.pageURL == '' || cItem.pageURL == undefined) ? '' : 'win-url="'
+							 + cItem.pageURL + '"',
+//                    		 cUrl = (cItem.pageURL == '' || cItem.pageURL == undefined) ? '' : 'win-url="SECMenu"',
                         cTitle = (cItem.title == '' || cItem.title == undefined) ? '' : 'win-title="' + cItem.title + '"',
                         cOpentype = (cItem.openType == '' || cItem.openType == undefined) ? '' : 'win-opentype="' + cItem.openType + '"',
                         cMaxopen = (cItem.maxOpen == '' || cItem.maxOpen == undefined) ? '' : 'win-maxopen="' + cItem.maxOpen + '"',
@@ -55,22 +57,41 @@ layui.define(['jquery', 'element', 'layer', 'winui'], function (exports) {
                     html += cicon;
                     html += '</div>';
                     html += '<span class="winui-menu-name">' + cItem.name + '</span></a>';
+                    if (cItem.childs) {
+                        html += '<dl class="layui-nav-child" style="margin-left:10px;">';
+                        $(cItem.childs).each(function (cIndex, ccItem) {
+                            var ccId = (ccItem.id == '' || ccItem.id == undefined) ? '' : 'win-id="' + ccItem.id + '"',
+                                ccUrl = (ccItem.pageURL == '' || ccItem.pageURL == undefined) ? '' : 'win-url="' + ccItem.pageURL + '"',
+                                ccTitle = (ccItem.title == '' || ccItem.title == undefined) ? '' : 'win-title="' + ccItem.title + '"',
+                                ccOpentype = (ccItem.openType == '' || ccItem.openType == undefined) ? '' : 'win-opentype="' + ccItem.openType + '"',
+                                ccMaxopen = (ccItem.maxOpen == '' || ccItem.maxOpen == undefined) ? '' : 'win-maxopen="' + ccItem.maxOpen + '"',
+                                ccWinIcon = (ccItem.icon == '' || ccItem.icon == undefined) ? '' : 'win-icon="' + cItem.icon + '"',
+                                ccicon = (ccItem.icon.indexOf('fa-') != -1 && ccItem.icon.indexOf('.') == -1) ? '<i class="fa ' + ccItem.icon + ' fa-fw"></i>' : '<img src="' + ccItem.icon + '" />';;
+                            html += '<dd ' + ccId + ' ' + ccUrl + ' ' + ccTitle + ' ' + ccOpentype + ' ' + ccMaxopen + ' ' + ccWinIcon + '>';
+                            html += '<a><div class="winui-menu-icon">'
+                            html += ccicon;
+                            html += '</div>';
+                            html += '<span class="winui-menu-name">' + ccItem.name + '</span></a></dd>';
+                            if (ccItem.childs) {
+                            }
+                        });
+                        html += '</dl>';
+                    }
                 });
                 html += '</dl>';
             }
             html += '</li>';
         });
         $('.winui-menu').html(html);
+        // 初始化layui的element（可以从新监听点击事件）
+       layui.element.init('nav', 'winuimenu');
 
-        //初始化layui的element（可以从新监听点击事件）
-        layui.element.init('nav', 'winuimenu');
-
-        //调用渲染完毕的回调函数
+        // 调用渲染完毕的回调函数
         if (typeof callback === 'function')
-            callback.call(this, menuItem);
+           callback.call(this, menuItem);
     }
 
-    //设置数据
+    // 设置数据
     Menu.prototype.setData = function (callback) {
         var obj = this
             , currOptions = obj.options;
@@ -112,29 +133,31 @@ layui.define(['jquery', 'element', 'layer', 'winui'], function (exports) {
         });
     };
 
-    //开始菜单项构造函数
+    // 开始菜单项构造函数
     var MenuItem = function () {
         this.contextmenuOptions = {};
     };
 
-    //菜单项单击事件
+    // 菜单项单击事件
     MenuItem.prototype.onclick = function (callback) {
         element.on('nav(winuimenu)', callback);
+        
+// element.on('nav(winuimenuSEc)', callback);
     };
 
-    //菜单项右键菜单定义
+    // 菜单项右键菜单定义
     MenuItem.prototype.contextmenu = function (options) {
         if (!options.item)
             return;
 
-        //重置右键事件
+        // 重置右键事件
         common.resetEvent('.winui-menu li:not(.parent),.winui-menu dd', 'mouseup', function (e) {
             if (!e) e = window.event;
             var currentItem = this;
             if (e.button == 2) {
                 var left = e.clientX;
                 var top = e.clientY;
-                //右键点击
+                // 右键点击
                 var div = '<ul class="menu-contextmenu" style="top:' + top + 'px;left:' + left + 'px;">';
                 $(options.item).each(function (index, item) {
                     var icon = item.icon ? '<i class="fa ' + item.icon + ' fa-fw"></i>' : '';
@@ -142,21 +165,21 @@ layui.define(['jquery', 'element', 'layer', 'winui'], function (exports) {
                 });
                 div += '</ul>';
 
-                //移除之前任务项右键菜单
+                // 移除之前任务项右键菜单
                 $('.menu-contextmenu').remove();
-                //渲染当前任务项右键菜单
+                // 渲染当前任务项右键菜单
                 $('body').append(div);
-                //绑定单击回调函数
+                // 绑定单击回调函数
                 $('ul.menu-contextmenu li').on('click', function () {
                     var index = $(this).index();
                     if (typeof options['item' + (index + 1)] !== 'function')
                         return;
-                    //调用回调函数
+                    // 调用回调函数
                     options['item' + (index + 1)].call(this, $(currentItem).attr('win-id'), $(currentItem));
 
                     $('.menu-contextmenu').remove();
                 });
-                //阻止右键菜单冒泡
+                // 阻止右键菜单冒泡
                 $('.menu-contextmenu li').on('click mousedown', call.sp);
             }
         });
@@ -167,18 +190,18 @@ layui.define(['jquery', 'element', 'layer', 'winui'], function (exports) {
 
     var menuItem = new MenuItem();
 
-    //公共事件
+    // 公共事件
     var common = {
-        //重置元素事件
+        // 重置元素事件
         resetEvent: function (selector, eventName, func) {
             if (typeof func != "function") return;
             $(selector).off(eventName).on(eventName, func);
         },
     };
 
-    //基础事件
+    // 基础事件
     var call = {
-        //阻止事件冒泡
+        // 阻止事件冒泡
         sp: function (event) {
             layui.stope(event);
         }
@@ -186,7 +209,7 @@ layui.define(['jquery', 'element', 'layer', 'winui'], function (exports) {
 
     var menu = new Menu();
 
-    //配置
+    // 配置
     menu.config = function (options) {
         options = options || {};
         for (var key in options) {
@@ -195,14 +218,14 @@ layui.define(['jquery', 'element', 'layer', 'winui'], function (exports) {
         return this;
     };
 
-    //初始化
+    // 初始化
     menu.init = function (options, callback) {
         if (typeof options === 'object') {
             this.config(options);
         } else if (typeof options == 'fuction') {
             callback = options;
         }
-        //缓存回调函数
+        // 缓存回调函数
         this.done = callback = callback || this.done;
 
         this.setData(function () {

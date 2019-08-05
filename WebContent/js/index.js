@@ -62,7 +62,7 @@
                 done: function (menuItem) {
                     //监听开始菜单点击
                     menuItem.onclick(function (elem) {
-                        OpenWindow(elem);
+                    	OpenWindowMenu(elem);
                     });
                     menuItem.contextmenu({
                         item: [{
@@ -96,6 +96,9 @@
             //初始化完毕回调
         });
     });
+//    $(".clcikSec").on('click', function () {
+//        OpenWindow(this);
+//    });
 
     //开始菜单磁贴点击
     $('.winui-tile').on('click', function () {
@@ -162,6 +165,89 @@
         } else {
             content = url;
         }
+        //核心方法（参数请看文档，config是全局配置 open是本次窗口配置 open优先级大于config）
+        winui.window.config({
+            anim: 0,
+            miniAnim: 0,
+            maxOpen: -1
+        }).open({
+            id: id,
+            type: type,
+            title: title,
+            content: content
+            //,area: ['70vw','80vh']
+            //,offset: ['10vh', '15vw']
+            , maxOpen: maxOpen
+            //, max: false
+            //, min: false
+            //, refresh:true
+        });
+    }
+    
+    
+    function OpenWindowMenu(menuItem) {
+        var $this = $(menuItem);
+
+        var url = $this.attr('win-url');
+        var title = $this.attr('win-title');
+        var id = $this.attr('win-id');
+        var type = parseInt($this.attr('win-opentype'));
+        var maxOpen = parseInt($this.attr('win-maxopen')) || -1;
+        if (url == 'SECMenu') {
+        	$this.children(".layui-nav-child").toggle();
+          return;
+      }
+        if (url == 'theme') {
+            winui.window.openTheme();
+            return;
+        }
+        
+      
+        
+        if (!url || !title || !id) {
+            winui.window.msg('菜单配置错误（菜单链接、标题、id缺一不可）');
+            return;
+        }
+
+        var content;
+        if (type === 1) {
+            $.ajax({
+                type: 'get',
+                url: url,
+                async: false,
+                success: function (data) {
+                    content = data;
+                },
+                error: function (e) {
+                    var page = '';
+                    switch (e.status) {
+                        case 404:
+                            page = '404.html';
+                            break;
+                        case 500:
+                            page = '500.html';
+                            break;
+                        default:
+                            content = "打开窗口失败";
+                    }
+                    $.ajax({
+                        type: 'get',
+                        url: 'views/error/' + page,
+                        async: false,
+                        success: function (data) {
+                            content = data;
+                        },
+                        error: function () {
+                            layer.close(load);
+                        }
+                    });
+                }
+            });
+        } else {
+            content = url;
+        }
+        window.event? window.event.cancelBubble = true : e.stopPropagation();
+        
         //核心方法（参数请看文档，config是全局配置 open是本次窗口配置 open优先级大于config）
         winui.window.config({
             anim: 0,

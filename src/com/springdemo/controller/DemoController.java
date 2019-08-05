@@ -1,4 +1,4 @@
-package com.springdemo.controller;
+ï»¿package com.springdemo.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,19 +22,25 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dugking.DTO.AllJsonTotal;
 import com.dugking.DTO.ClusterInc;
 import com.dugking.DTO.ClusterLabel;
+import com.dugking.DTO.DataSetIndexAttrDetail;
+import com.dugking.DTO.DataSetIndexDetail;
 import com.dugking.DTO.DatasetsAttr;
 import com.dugking.DTO.GetArr;
 import com.dugking.DTO.GetMethodParam;
 import com.dugking.DTO.GetMethodParamGNMF;
 import com.dugking.DTO.Status;
+import com.dugking.DTO.TableJson;
 import com.dugking.Util.DatasetAttributes;
 import com.dugking.Util.FileUtil;
 import com.dugking.Util.GlobalData;
 import com.dugking.Util.GraphType;
 import com.dugking.Util.ListUnion;
+import com.dugking.Util.MultiViewData;
 import com.dugking.Util.SerizelizeModel;
+import com.dugking.Util.StaticDug;
 import com.dugking.Util.UtilPython;
 import com.dugking.algorithmMNMF.GMNMF;
 import com.dugking.algorithmMNMF.MNMF;
@@ -50,185 +56,271 @@ import com.dugking.model.Series;
 import com.dugking.model.Tootip;
 import com.dugking.model.XAxis;
 import com.dugking.model.YAxis;
-import com.springdemo.services.Humn;
-
 import Jama.Matrix;
 
 @Controller
-@RequestMapping(value={"/demo","/"})
+@RequestMapping(value = { "/demo", "/" })
 public class DemoController {
 
-	@Autowired
-	public Humn humn;
+	// ä¸Šä¼ çš„æ–‡ä»¶çš„è·¯å¾„ï¼Œéœ€è¦åˆ¤æ–­æ˜¯å¦ä¸ºç©º
+	private static String fileUrPath = "";
 
-	@RequestMapping(value={"/index","/"})
+	@RequestMapping(value = { "/index", "/" })
 	public String index() {
 		return "index";
 	}
-	
-	@RequestMapping("/login")
+
+	// ç™»å½•ç•Œé¢ å¯åŠ¨ç•Œé¢
+	@RequestMapping(value = { "/login" })
 	public String login() {
 		return "login";
 	}
 
-	@RequestMapping("/demo")
-	public String demo() {
-		return "demo";
-	}
-
-	@RequestMapping("/showdatasets")
-	public String showdatasets() {
-		
-		return "showdatasets";
-	}
-	
-	@RequestMapping(value={"/theme"})
+	// ä¸»é¢˜é¡µé¢ å¼€å§‹
+	@RequestMapping(value = { "/theme" })
 	public String theme() {
 		return "theme";
 	}
+	// ä¸»é¢˜é¡µé¢ ç»“æŸ
+
+	// æµæ•°æ®èšç±»ç•Œé¢ å¼€å§‹
 	@RequestMapping("/streamCluster")
 	public String streamCluster() {
 		return "streamCluster";
 	}
+	// æµæ•°æ®èšç±»ç•Œé¢ ç»“æŸ
+
+	// æµæ•°æ®å¼‚å¸¸ç•Œé¢ å¼€å§‹
 	@RequestMapping("/streamOutlier")
 	public String streamOutlier() {
 		return "streamOutlier";
 	}
+	// æµæ•°æ®å¼‚å¸¸ç•Œé¢ ç»“æŸ
+
+	// é‡å ç¤¾åŒº å¼€å§‹
 	@RequestMapping("/overlapDetec")
 	public String overlapDetec() {
 		return "showdatasets";
 	}
+	// é‡å ç¤¾åŒº ç»“æŸ
+
 	@RequestMapping("/meathPath")
 	public String meathPath() {
 		return "meathPath";
 	}
+
 	@RequestMapping("/structureHole")
 	public String structureHole() {
 		return "structureHole";
 	}
-	
+
 	@RequestMapping("/NetworkEmbedding")
 	public String NetworkEmbedding() {
 		return "NetworkEmbedding";
 	}
-	
-	
+
 	@RequestMapping("/DeepHawkes")
 	public String DeepHawkes() {
 		return "DeepHawkes";
 	}
-	
+
 	@RequestMapping("/comRumor")
 	public String comRumor() {
 		return "comRumor";
 	}
-	
+
+	// æ¨é€è®ºæ–‡æ‰€å±ç•Œé¢
 	@RequestMapping("/allyangxiao")
 	public String allyangxiao() {
-		
+
 		return "allyangxiao";
 	}
+
 	@RequestMapping("/sociallocation")
-	public ModelAndView sociallocation(){
+	public ModelAndView sociallocation() {
 		ModelAndView model = new ModelAndView("sociallocation");
 		return model;
 	}
+
+	// å•è§†è§’èšç±» æ§åˆ¶å™¨ å¼€å§‹.....
+	@RequestMapping("/showsingledatasetsDetail")
+	public String showsingledatasetsDetail() {
+
+		return "showSingleView/showsingledatasetsDetail";
+	}
+
+	@RequestMapping("/showsingleview")
+	public String showsingleview() {
+
+		return "showSingleView/showsingleview";
+	}
+
+	@RequestMapping("/showSingleDataAnalysis")
+	public ModelAndView showSingleDataAnalysis() {
+		ModelAndView model = new ModelAndView("showSingleView/showSingleDataAnalysis");
+		return model;
+	}
+	@RequestMapping("/showSingleCluster")
+	public ModelAndView showSingleCluster() {
+		ModelAndView model = new ModelAndView("showSingleView/showSingleCluster");
+		return model;
+	}
+	// å•è§†è§’èšç±» æ§åˆ¶å™¨ ç»“æŸ.....
+
 	
-	@RequestMapping(value = "/showdatasetsDetails", method = RequestMethod.GET)
-	public @ResponseBody DatasetsAttr showdatasetsDetails(String datasetName) {
-
-		DatasetsAttr model = DatasetAttributes.getattributes(datasetName);
-		return model;
-	}
-
-	@RequestMapping("/show")
-	public ModelAndView show() {
-		ModelAndView model = new ModelAndView("show");
-		return model;
-	}
-
-	@RequestMapping("/multiview")
+	// å¤šè§†è§’æ§åˆ¶å™¨å¼€å§‹
+//	@RequestMapping("/multiview")
 	public ModelAndView multiview() {
 		ModelAndView model = new ModelAndView("multi_view");
 		return model;
 	}
-
+	
 	@RequestMapping("/showCluster")
 	public ModelAndView showCluster() {
-		ModelAndView model = new ModelAndView("showCluster");
+		ModelAndView model = new ModelAndView("multiviewNew/showCluster");
 		return model;
 	}
+
+	@RequestMapping(value = "/showdatasetsDetails", method = RequestMethod.GET)
+	public @ResponseBody DatasetsAttr showdatasetsDetails(String datasetName) {
+		DatasetsAttr model = DatasetAttributes.getattributes(datasetName);
+		return model;
+	}
+
+	@RequestMapping("/showdatasetsDetail")
+	public ModelAndView showdatasetsDetail() {
+		ModelAndView model = new ModelAndView("multiviewNew/showdatasetsDetail");
+		return model;
+	}
+
+	@RequestMapping(value = "/getDataSETAtt", method = RequestMethod.GET)
+	public @ResponseBody DatasetsAttr getDataSETAtt() {
+
+		DatasetsAttr model = new DatasetsAttr();
+		MultiViewData model2 = MultiViewData.getInstance(fileUrPath);
+		model.setNumViews(model2.getNumView());
+		model.setSamples(model2.getNum());
+		model.setDatasetname(fileUrPath.substring(fileUrPath.lastIndexOf('\\') + 1));
+		return model;
+
+	}
+
+	@RequestMapping(value = "/getIndexDetail", method = RequestMethod.GET)
+	public @ResponseBody DataSetIndexDetail getIndexDetail(int curView, int index) {
+
+		DataSetIndexDetail model = new DataSetIndexDetail();
+
+		MultiViewData model2 = MultiViewData.getInstance(fileUrPath);
+		if (curView < 0)
+			curView = 0;
+
+		if (curView >= model2.getNumView()) {
+			curView = model2.getNumView() - 1;
+		}
+		double[][] arr = model2.getListView().get(curView);
+
+		double zuidazhi = StaticDug.getMax(arr, index);
+		double zuixiaozhi = StaticDug.getMin(arr, index);
+		double mean = StaticDug.getMean(arr, index);
+		double std = StaticDug.getStandardDiviation(arr, index);
+
+		model.setMean(mean);
+		model.setStd(std);
+		model.setZuidazhi(zuidazhi);
+		model.setZuixiaozhi(zuixiaozhi);
+		model.setDim(StaticDug.getCurViewDim(arr, index));
+		model.setCurView(curView);
+		return model;
+
+	}
+
+	@RequestMapping(value = "/getIndexAttrDetail", method = RequestMethod.GET)
+	public @ResponseBody DataSetIndexAttrDetail getIndexAttrDetail(int curView, int index) {
+
+		MultiViewData model2 = MultiViewData.getInstance(fileUrPath);
+		if (curView < 0)
+			curView = 0;
+
+		if (curView >= model2.getNumView()) {
+			curView = model2.getNumView() - 1;
+		}
+		double[][] arr = model2.getListView().get(curView);
+
+		DataSetIndexAttrDetail model = new DataSetIndexAttrDetail();
+		double[] arrRe = StaticDug.getIndexData(arr, index);
+		model.setArr(arrRe);
+		model.setLabel(StaticDug.getIndexDataLabel(arr, index));
+		return model;
+
+	}
+
+	@RequestMapping(value = "/getTableJson", method = RequestMethod.GET)
+	public @ResponseBody List<TableJson> getTableJson(int curView) {
+		TableJson table = new TableJson();
+		List<TableJson> ModelList = new ArrayList<TableJson>();
+
+		MultiViewData model = MultiViewData.getInstance(fileUrPath);
+		if (curView < 0)
+			curView = 0;
+
+		if (curView >= model.getNumView()) {
+			curView = model.getNumView() - 1;
+		}
+		int size = model.getDimnum(curView);
+		for (int i = 0; i < size; i++) {
+			table = new TableJson();
+			table.setName("Attr" + i);
+			table.setNumber(i);
+			ModelList.add(table);
+		}
+
+		return ModelList;
+
+	}
+
+
+
+	
 
 	@RequestMapping("/showDataAnalysis")
 	public ModelAndView showDataAnalysis() {
-		ModelAndView model = new ModelAndView("showDataAnalysis");
+		ModelAndView model = new ModelAndView("multiviewNew/showDataAnalysis");
 		return model;
 	}
+
+	// è·å–å½“å‰sessionçŠ¶æ€
 	@RequestMapping(value = "/getCurrentStatus", method = RequestMethod.GET)
-	public @ResponseBody Status getCurrentStatus(HttpServletRequest request){
+	public @ResponseBody Status getCurrentStatus(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		Status model=new Status();
-		
+		Status model = new Status();
+
 		model.setDesc(session.getAttribute("statusCur").toString());
 		return model;
 	}
-	
-	@RequestMapping(value = "/getPyResult", method = RequestMethod.GET)
-	public @ResponseBody String getPyResult(HttpServletRequest request) {
-		String result="";
-		try {
-			String py="python C:\\Users\\Administrator\\Documents\\WeChat Files\\D912342642\\FileStorage\\File\\2019-07\\CCIM\\CCIM\\gorithm\\OcDIM.py";
-			
-			result=UtilPython.executePython(py);
-		} catch (IOException | InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
-	
-	
+
 	@RequestMapping(value = "/getShopInJSON", method = RequestMethod.GET)
 	public @ResponseBody JsonQXChart getShopInJSON(GetMethodParam model, HttpServletRequest request) {
-		//ÓÃÀ´±£´æµ±Ç°×´Ì¬....
-		HttpSession session = request.getSession();
-				
-		session.setAttribute("statusCur", "¿ªÊ¼Ö´ĞĞ.....");
-		String datasetName2= model.getDatasets();
-		String datasetPath = request.getServletContext().getRealPath("/dataset/multiviewdata/");
-		if (model.getDatasets() == null || model.getDatasets().equals(""))
-			model.setDatasets("/3sources.mat");
-		else {
-			model.setDatasets("/" + model.getDatasets() + ".mat");
-		}
 
-		String datasetName = model.getDatasets();
-		
-		
-		model.setClusterNum(DatasetAttributes.getattributes(datasetName2).getClusterNum());
-		model.setNumsSamples(DatasetAttributes.getattributes(datasetName2).getSamples());
-		
-		System.out.println(DatasetAttributes.getattributes(datasetName2).getClusterNum());
-		
-		
-		
-		Map<String, ArrayList<double[][]>> listData = FileUtil.getMatCell2ArrayList(datasetPath + datasetName, "data");
+		MultiViewData modelDataSet = MultiViewData.getInstance(fileUrPath);
+		// ç”¨æ¥ä¿å­˜å½“å‰çŠ¶æ€....
+		HttpSession session = request.getSession();
+		session.setAttribute("statusCur", "å¼€å§‹æ‰§è¡Œ.....");
+
+		Map<String, ArrayList<double[][]>> listData = FileUtil.getMatCell2ArrayList(fileUrPath, "data");
 		ArrayList<double[][]> arrDataSet = listData.get("data");
 		List<Matrix> listV = new ArrayList<Matrix>();
 		for (int i = 0; i < arrDataSet.size(); i++) {
 			double[][] dataSingle = arrDataSet.get(i);
 			double[][] inputData = new Matrix(dataSingle).transpose().getArray();
-			
+
 			ConstrucGraph modelGraph = new ConstrucGraph(inputData, 7, 8, GraphType.HeartKernel);
 			listV.add(modelGraph.getGraphKnn());
-			session.setAttribute("statusCur", "ÕıÔÚ´¦ÀíÊı¾İ.....");
+			session.setAttribute("statusCur", "æ­£åœ¨å¤„ç†æ•°æ®.....");
 		}
-		session.setAttribute("statusCur", "ÕıÔÚ·Ö½â.....");
+		session.setAttribute("statusCur", "æ­£åœ¨åˆ†è§£.....");
 		if (model.getMethod().equals("MNMF")) {
-			
-			Map<String, ArrayList<double[][]>> listLabel = FileUtil.getMatCell2ArrayList(datasetPath + datasetName,
-					"truelabel");
+
+			Map<String, ArrayList<double[][]>> listLabel = FileUtil.getMatCell2ArrayList(fileUrPath, "truelabel");
 			double[][] label = listLabel.get("truelabel").get(0);
 			int clusterNum = ListUnion.getCluster(label);
 			model.setClusterNum(clusterNum);
@@ -237,24 +329,24 @@ public class DemoController {
 					Math.pow(0.1, model.getRelarErr()), 1);
 			model2.update();
 
-			String serModel =request.getServletContext().getRealPath("/model");
+			String serModel = request.getServletContext().getRealPath("/model");
 
-			SerizelizeModel.serlizeModel(model2, serModel +"model.model");
+			SerizelizeModel.serlizeModel(model2, serModel + "model.model");
 
 			System.out.println(request.getServletContext().getRealPath("/model"));
-			model2 = SerizelizeModel.deSerlizeModel(serModel +"model.model");
+			model2 = SerizelizeModel.deSerlizeModel(serModel + "model.model");
 
-			System.out.println("-----ÇëÇójsonÊı¾İ--------");
+			System.out.println("-----è¯·æ±‚jsonæ•°æ®--------");
 			JsonQXChart json = new JsonQXChart();
 
 			YAxis yModel = new YAxis();
 			Map<String, String> title = new HashMap<String, String>();
-			title.put("text", "ËğÊ§º¯Êı");
+			title.put("text", "æŸå¤±å‡½æ•°");
 			yModel.setTitle(title);
 			json.setyAxis(yModel);
 
 			Map<String, String> titleYAxis = new HashMap<String, String>();
-			titleYAxis.put("text", "ËğÊ§º¯Êı");
+			titleYAxis.put("text", "æŸå¤±å‡½æ•°");
 			json.setTitle(titleYAxis);
 
 			Map<String, String> titlesub = new HashMap<String, String>();
@@ -270,11 +362,11 @@ public class DemoController {
 			json.setxAxis(xModel);
 
 			Tootip tootip = new Tootip();
-			tootip.setValueSuffix("ËğÊ§º¯ÊıÎª:");
+			tootip.setValueSuffix("æŸå¤±å‡½æ•°ä¸º:");
 			json.setTootip(tootip);
 
 			Series sModel = new Series();
-			sModel.setName("ËğÊ§º¯ÊıÍ¼");
+			sModel.setName("æŸå¤±å‡½æ•°å›¾");
 
 			ArrayList<Double> arrInt = new ArrayList<Double>();
 			for (int i = 0; i < model2.getErrAll().length; i++) {
@@ -300,44 +392,37 @@ public class DemoController {
 			System.out.println(ClusterEvaluation.NMI(model2.getLabelCluster(), arrLabel));
 			System.out.println(ClusterEvaluation.Purity(model2.getLabelCluster(), arrLabel));
 			System.out.println("MNMF");
-			session.setAttribute("statusCur", "·Ö½âÍê³É£¡");
+			session.setAttribute("statusCur", "åˆ†è§£å®Œæˆï¼");
 			return json;
-			
+
 		} else if (model.getMethod().equals("GMNMF")) {
-			Map<String, ArrayList<double[][]>> listLabel = FileUtil.getMatCell2ArrayList(datasetPath + datasetName,
-					"truelabel");
+			Map<String, ArrayList<double[][]>> listLabel = FileUtil.getMatCell2ArrayList(fileUrPath, "truelabel");
 			double[][] label = listLabel.get("truelabel").get(0);
 			int clusterNum = ListUnion.getCluster(label);
 			model.setClusterNum(clusterNum);
-
-			// MNMF model2 = new MNMF(listV,
-			// Integer.valueOf(model.getMaxIter()), model.getClusterNum(),
-			// Math.pow(0.1, 10),
-			// Math.pow(0.1, model.getRelarErr()), 1);
-			// model2.update();
 
 			GMNMF model2 = new GMNMF(listV, Integer.valueOf(model.getMaxIter()), model.getClusterNum(),
 					Math.pow(0.1, 10), Math.pow(0.1, model.getRelarErr()), 1, 10);
 			model2.update();
 
-			String serModel =request.getServletContext().getRealPath("/model");
+			String serModel = request.getServletContext().getRealPath("/model");
 
-			SerizelizeModel.serlizeModel(model2, serModel +"model.model");
+			SerizelizeModel.serlizeModel(model2, serModel + "model.model");
 
 			System.out.println(request.getServletContext().getRealPath("/model"));
-			model2 = SerizelizeModel.deSerlizeModel(serModel +"model.model");
+			model2 = SerizelizeModel.deSerlizeModel(serModel + "model.model");
 
-			System.out.println("-----ÇëÇójsonÊı¾İ--------");
+			System.out.println("-----è¯·æ±‚jsonæ•°æ®--------");
 			JsonQXChart json = new JsonQXChart();
 
 			YAxis yModel = new YAxis();
 			Map<String, String> title = new HashMap<String, String>();
-			title.put("text", "ËğÊ§º¯Êı");
+			title.put("text", "æŸå¤±å‡½æ•°");
 			yModel.setTitle(title);
 			json.setyAxis(yModel);
 
 			Map<String, String> titleYAxis = new HashMap<String, String>();
-			titleYAxis.put("text", "ËğÊ§º¯Êı");
+			titleYAxis.put("text", "æŸå¤±å‡½æ•°");
 			json.setTitle(titleYAxis);
 
 			Map<String, String> titlesub = new HashMap<String, String>();
@@ -353,11 +438,11 @@ public class DemoController {
 			json.setxAxis(xModel);
 
 			Tootip tootip = new Tootip();
-			tootip.setValueSuffix("ËğÊ§º¯ÊıÎª:");
+			tootip.setValueSuffix("æŸå¤±å‡½æ•°ä¸º:");
 			json.setTootip(tootip);
 
 			Series sModel = new Series();
-			sModel.setName("ËğÊ§º¯ÊıÍ¼");
+			sModel.setName("æŸå¤±å‡½æ•°å›¾");
 
 			ArrayList<Double> arrInt = new ArrayList<Double>();
 			for (int i = 0; i < model2.getErrAll().length; i++) {
@@ -383,7 +468,7 @@ public class DemoController {
 			System.out.println(ClusterEvaluation.NMI(model2.getLabelCluster(), arrLabel));
 			System.out.println(ClusterEvaluation.Purity(model2.getLabelCluster(), arrLabel));
 			System.out.println("GMNMF");
-			session.setAttribute("statusCur", "·Ö½âÍê³É£¡");
+			session.setAttribute("statusCur", "åˆ†è§£å®Œæˆï¼");
 			return json;
 		}
 		return null;
@@ -395,146 +480,168 @@ public class DemoController {
 		String serModel = request.getServletContext().getRealPath("/model");
 		System.out.println(request.getServletContext().getRealPath("/model"));
 		MNMF_Base model2 = SerizelizeModel.deSerlizeModel(serModel + "model.model");
-		System.out.println("-----ÇëÇójsonÊı¾İ--------");
+		System.out.println("-----è¯·æ±‚jsonæ•°æ®--------");
+		ClusterModel json = new ClusterModel();
+		json.setClusterVector((model2).getH().getArray());
+		json.setLabel(GlobalData.labelData);
+		return json;
+	}
+	// å¤šè§†è§’æ§åˆ¶å™¨ ç»“æŸ
+
+	// å•è§†è§’èšç±»æ§åˆ¶å™¨
+	
+	@RequestMapping(value = "/getSingleJsonCluster", method = RequestMethod.POST)
+	public @ResponseBody ClusterModel getSingleJsonCluster(GetMethodParam model, HttpServletRequest request) {
+		String serModel = request.getServletContext().getRealPath("/model");
+		System.out.println(request.getServletContext().getRealPath("/model"));
+		Single_GNMF model2 = SerizelizeModel.deSerlizeModel(serModel + "model.model");
+		System.out.println("-----è¯·æ±‚jsonæ•°æ®--------");
 		ClusterModel json = new ClusterModel();
 		json.setClusterVector((model2).getH().getArray());
 
 		json.setLabel(GlobalData.labelData);
 		return json;
 	}
-
-	@RequestMapping("/uploadHtml")
-	public String uploadHtml() {
-		return "uploadHtml";
-	}
-
+	
 	@RequestMapping(value = "/getSVCLuster")
-	public @ResponseBody ClusterLabel getSVCLuster(GetMethodParamGNMF model, HttpServletRequest request) {
-		ClusterLabel json = new ClusterLabel();
-		if (model.getClusterNum() <= 0) {
-			json.setCode(300);
-			json.setDesc("¾ÛÀà´Ø²»ÄÜĞ¡ÓÚ0");
-		}
-		else {
-			String datasetPath = request.getServletContext().getRealPath("/dataset/multiviewdata/");
-			model.setDatasets("/" + model.getDatasets());
-			String datasetName = model.getDatasets();
-			Matrix W = FileUtil.loadDataSetTrain(datasetPath + datasetName, model.getSamples_num(),
-					model.getAttributeLength(), true);
-			LaplanceDug eigenmap = new LaplanceDug(W.getArray(), 5, 0.5, GraphType.Binary);
-			Matrix d = eigenmap.getdDug();
-			Matrix w = eigenmap.getwDug();
-			Single_GNMF modelGNMF = new Single_GNMF(W.transpose(), model.getMaxIter(), model.getClusterNum(),
-					Math.pow(0.1, 10), Math.pow(0.1, 10), model.getAlpha(), d, w);
-			modelGNMF.update();
-			modelGNMF.getClusterLabel(modelGNMF.getH());
-			json.setLabel(modelGNMF.getLabelCluster());
-			json.setH(modelGNMF.getH().getArray());
-			json.setCode(200);
-		}
-		return json;
+	public @ResponseBody JsonQXChart getSVCLuster(GetMethodParamGNMF model, HttpServletRequest request) {
 
-	}
+//		MultiViewData modelDataSet = MultiViewData.getInstance(fileUrPath);
+		// ç”¨æ¥ä¿å­˜å½“å‰çŠ¶æ€....
+		HttpSession session = request.getSession();
+		session.setAttribute("statusCur", "å¼€å§‹æ‰§è¡Œ.....");
 
-	@RequestMapping(value = "/getMVCLuster")
-	public @ResponseBody ClusterLabel getMVCLuster(GetMethodParam model, HttpServletRequest request) {
+		Map<String, ArrayList<double[][]>> listData = FileUtil.getMatCell2ArrayList(fileUrPath, "data");
 
-		ClusterLabel json = new ClusterLabel();
-		if (model.getClusterNum() <= 0) {
-			json.setCode(300);
-			json.setDesc("¾ÛÀà´Ø²»ÄÜĞ¡ÓÚ0");
-		}
-
-		String datasetPath = request.getServletContext().getRealPath("/dataset/multiviewdata/");
-		if (!model.getDatasets().contains(".mat"))
-			model.setDatasets("/" + model.getDatasets() + ".mat");
-		else {
-			model.setDatasets("/" + model.getDatasets());
-		}
-
-		String datasetName = model.getDatasets();
-		Map<String, ArrayList<double[][]>> listData = FileUtil.getMatCell2ArrayList(datasetPath + datasetName, "data");
 		ArrayList<double[][]> arrDataSet = listData.get("data");
 		List<Matrix> listV = new ArrayList<Matrix>();
 		for (int i = 0; i < arrDataSet.size(); i++) {
 			double[][] dataSingle = arrDataSet.get(i);
 			double[][] inputData = new Matrix(dataSingle).transpose().getArray();
-			int nn = (int) Math.floor(Math.sqrt(inputData.length));
-			ConstrucGraph modelGraph = new ConstrucGraph(inputData, 7, nn, GraphType.HeartKernel);
-			listV.add(modelGraph.getGraphKnn());
-		}
 
-		Map<String, ArrayList<double[][]>> listLabel = FileUtil.getMatCell2ArrayList(datasetPath + datasetName,
-				"truelabel");
+			ConstrucGraph modelGraph = new ConstrucGraph(inputData, 7, 8, GraphType.HeartKernel);
+			listV.add(modelGraph.getGraphKnn());
+			session.setAttribute("statusCur", "æ­£åœ¨å¤„ç†æ•°æ®.....");
+		}
+		session.setAttribute("statusCur", "æ­£åœ¨åˆ†è§£.....");
+		
+		Map<String, ArrayList<double[][]>> listLabel = FileUtil.getMatCell2ArrayList(fileUrPath, "truelabel");
 		double[][] label = listLabel.get("truelabel").get(0);
 		int clusterNum = ListUnion.getCluster(label);
 		model.setClusterNum(clusterNum);
+		
+		LaplanceDug eigenmap = new LaplanceDug(listV.get(0).getArray(), 5, 0.5, GraphType.Binary);
+		Matrix d = eigenmap.getdDug();
+		Matrix w = eigenmap.getwDug();
+		
+		Single_GNMF modelGNMF = new Single_GNMF(listV.get(0).transpose(), model.getMaxIter(), model.getClusterNum(),
+		Math.pow(0.1, 10), Math.pow(0.1, 10), model.getAlpha(), d, w);
+		modelGNMF.update();
 
-		if (model.getMethod().endsWith("MNMF")) {
-			MNMF model2 = new MNMF(listV, Integer.valueOf(model.getMaxIter()), model.getClusterNum(), Math.pow(0.1, 10),
-					Math.pow(0.1, model.getRelarErr()), 1);
-			model2.update();
-			String serModel = request.getServletContext().getRealPath("/model");
-			SerizelizeModel.serlizeModel(model2, serModel + "MMNFModel.model");
 
-			System.out.println(request.getServletContext().getRealPath("/model"));
-			model2 = SerizelizeModel.deSerlizeModel(serModel + "MMNFModel.model");
+		String serModel = request.getServletContext().getRealPath("/model");
 
-			int[] arrLabel = ListUnion.getDouble2Int(label);
-			GlobalData.labelData = arrLabel;
-			model2.getClusterLabel(model2.getH());
+		SerizelizeModel.serlizeModel(modelGNMF, serModel + "model.model");
 
-			json.setLabel(model2.getLabelCluster());
-			json.setH(model2.getH().getArray());
-			json.setCode(200);
-			return json;
-		} else if (model.getMethod().endsWith("GMNMF")) {
-			GMNMF model2 = new GMNMF(listV, Integer.valueOf(model.getMaxIter()), model.getClusterNum(),
-					Math.pow(0.1, 10), Math.pow(0.1, model.getRelarErr()), 1, model.getAplpha());
-			model2.update();
-			String serModel = request.getServletContext().getRealPath("/model");
-			SerizelizeModel.serlizeModel(model2, serModel + "MMNFModel.model");
+		System.out.println(request.getServletContext().getRealPath("/model"));
+		modelGNMF = SerizelizeModel.deSerlizeModel(serModel + "model.model");
 
-			System.out.println(request.getServletContext().getRealPath("/model"));
-			model2 = SerizelizeModel.deSerlizeModel(serModel + "MMNFModel.model");
+		System.out.println("-----è¯·æ±‚jsonæ•°æ®--------");
+		JsonQXChart json = new JsonQXChart();
 
-			int[] arrLabel = ListUnion.getDouble2Int(label);
-			GlobalData.labelData = arrLabel;
-			model2.getClusterLabel(model2.getH());
+		YAxis yModel = new YAxis();
+		Map<String, String> title = new HashMap<String, String>();
+		title.put("text", "æŸå¤±å‡½æ•°");
+		yModel.setTitle(title);
+		json.setyAxis(yModel);
 
-			json.setLabel(model2.getLabelCluster());
-			json.setH(model2.getH().getArray());
-			json.setCode(200);
-			return json;
-		} else {
-			json.setCode(500);
-			json.setDesc("Ã»ÓĞ¶ÔÓ¦µÄ¶àÊÓ½Ç¾ÛÀà·½·¨");
-			return json;
+		Map<String, String> titleYAxis = new HashMap<String, String>();
+		titleYAxis.put("text", "æŸå¤±å‡½æ•°");
+		json.setTitle(titleYAxis);
+
+		Map<String, String> titlesub = new HashMap<String, String>();
+		titlesub.put("text", "");
+		json.setSubTitle(titlesub);
+
+		ArrayList<String> arr = new ArrayList<String>();
+		for (int i = 0; i < modelGNMF.getErrAll().length; i++) {
+			arr.add(String.valueOf(i + 1));
 		}
+		XAxis xModel = new XAxis();
+		xModel.setCategories(arr);
+		json.setxAxis(xModel);
+
+		Tootip tootip = new Tootip();
+		tootip.setValueSuffix("æŸå¤±å‡½æ•°ä¸º:");
+		json.setTootip(tootip);
+
+		Series sModel = new Series();
+		sModel.setName("æŸå¤±å‡½æ•°å›¾");
+
+		ArrayList<Double> arrInt = new ArrayList<Double>();
+		for (int i = 0; i < modelGNMF.getErrAll().length; i++) {
+			arrInt.add(modelGNMF.getErrAll()[i][0]);
+		}
+
+		sModel.setData(arrInt);
+		ArrayList<Series> getArrSeries = new ArrayList<Series>();
+		getArrSeries.add(sModel);
+
+		json.setArrSeries(getArrSeries);
+
+		Legend legend = new Legend();
+		legend.setAlign("center");
+		legend.setLayout("vertical");
+		legend.setBorderWidth(1);
+		legend.setVerticalAlign("middle");
+		json.setLengend(legend);
+		int[] arrLabel = ListUnion.getDouble2Int(label);
+		GlobalData.labelData = arrLabel;
+		modelGNMF.getClusterLabel(modelGNMF.getH());
+
+		System.out.println(ClusterEvaluation.NMI(modelGNMF.getLabelCluster(), arrLabel));
+		System.out.println(ClusterEvaluation.Purity(modelGNMF.getLabelCluster(), arrLabel));
+		System.out.println("MNMF");
+		session.setAttribute("statusCur", "åˆ†è§£å®Œæˆï¼");
+		return json;
+
 	}
 
-	// ÉÏ´«ÎÄ¼ş»á×Ô¶¯°ó¶¨µ½MultipartFileÖĞ
+	// ä¸Šä¼ æ–‡ä»¶ä¼šè‡ªåŠ¨ç»‘å®šåˆ°MultipartFileä¸­
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public @ResponseBody Status upload(HttpServletRequest request, @RequestParam("file") MultipartFile file)
 			throws Exception {
 
 		Status status = new Status();
-		// Èç¹ûÎÄ¼ş²»Îª¿Õ£¬Ğ´ÈëÉÏ´«Â·¾¶
+		// å¦‚æœæ–‡ä»¶ä¸ä¸ºç©ºï¼Œå†™å…¥ä¸Šä¼ è·¯å¾„
 		if (!file.isEmpty()) {
-			// ÉÏ´«ÎÄ¼şÂ·¾¶
+			// ä¸Šä¼ æ–‡ä»¶è·¯å¾„
 			String path = request.getServletContext().getRealPath("/dataset/");
-			// ÉÏ´«ÎÄ¼şÃû
+			// ä¸Šä¼ æ–‡ä»¶å
 			String filename = file.getOriginalFilename();
 			File filepath = new File(path, filename);
 			if (filepath.exists()) {
 				filepath.delete();
 			}
-			// ÅĞ¶ÏÂ·¾¶ÊÇ·ñ´æÔÚ£¬Èç¹û²»´æÔÚ¾Í´´½¨Ò»¸ö
+			// åˆ¤æ–­è·¯å¾„æ˜¯å¦å­˜åœ¨ï¼Œå¦‚æœä¸å­˜åœ¨å°±åˆ›å»ºä¸€ä¸ª
 			if (!filepath.getParentFile().exists()) {
 				filepath.getParentFile().mkdirs();
 			}
-			// ½«ÉÏ´«ÎÄ¼ş±£´æµ½Ò»¸öÄ¿±êÎÄ¼şµ±ÖĞ
-			file.transferTo(new File(path + File.separator + filename));
+			// å°†ä¸Šä¼ æ–‡ä»¶ä¿å­˜åˆ°ä¸€ä¸ªç›®æ ‡æ–‡ä»¶å½“ä¸­
+
+			fileUrPath = path + File.separator + filename;
+			file.transferTo(new File(fileUrPath));
+
+			MultiViewData multiViewData = MultiViewData.getInstance(fileUrPath);
+			Map<String, ArrayList<double[][]>> listData = FileUtil.getMatCell2ArrayList(fileUrPath, "data");
+			ArrayList<double[][]> arrDataSet = listData.get("data");
+
+			multiViewData.setListView(arrDataSet);
+
+			Map<String, ArrayList<double[][]>> listLabel = FileUtil.getMatCell2ArrayList(fileUrPath, "truelabel");
+			double[][] label = listLabel.get("truelabel").get(0);
+			multiViewData.setLabel(label);
+
 			status.setCode(200);
 			return status;
 		} else {
@@ -543,7 +650,7 @@ public class DemoController {
 		}
 	}
 
-	/// »ñµÃ¾ÛÀà½á¹û
+	/// è·å¾—èšç±»ç»“æœ
 	@RequestMapping(value = "/getClusterInc", method = RequestMethod.POST)
 	public @ResponseBody ClusterInc getClusterInc(GetArr model) {
 		String[] A = model.getExpected().split(",");

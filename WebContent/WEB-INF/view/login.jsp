@@ -33,6 +33,9 @@ body {
 	/*在页面顶部加载背景最佳，如有必要这块可以从数据库读取*/
 	background-image: url(<%=basePath%>images/bg_04.jpg);
 }
+/* #login_div{
+float: right; margin-right: 2%;
+} */
 </style>
 
 </head>
@@ -54,6 +57,13 @@ body {
 					<button class="login">
 						<i class="fa fa-arrow-right"></i>
 					</button>
+				</div>
+				<br>
+				<div class="winui-from-group" style="border:none;">
+					<p class="">Version:0.01</p>
+					<p class="">完成时间:2019-08-05</p>
+					<p class="">完成单位:云南大学信息学院</p>
+					<p class="">项目名称:<br/>基于传感数据的公共安全事件预警关键技术研究</p>
 				</div>
 			
 		</div>

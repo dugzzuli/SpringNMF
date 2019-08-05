@@ -6,7 +6,7 @@
       "title": "基于社区发现的动态谣言影响最小化",
       "pageURL": "demo/comRumor",
       "name": "基于社区发现的动态谣言影响最小化",
-       "icon": "http://puq7bvxwj.bkt.clouddn.com/yaoyan.png",
+      "icon": "http://puq7bvxwj.bkt.clouddn.com/yaoyan.png",
       "openType": 2,
       "extend": false,
       "childs": null,
@@ -16,7 +16,7 @@
       "title": "基于主题的的微博转发流行度预测",
       "pageURL": "demo/DeepHawkes",
       "name": "基于主题的的微博转发流行度预测",
-       "icon": "http://puq7bvxwj.bkt.clouddn.com/infodiffusion.png",
+      "icon": "http://puq7bvxwj.bkt.clouddn.com/infodiffusion.png",
       "openType": 2,
       "extend": false,
       "childs": null,
@@ -26,7 +26,7 @@
       "title": "基于元路径加权的结构洞挖掘",
       "pageURL": "demo/structureHole",
       "name": "基于元路径加权的结构洞挖掘",
-       "icon": "http://puq7bvxwj.bkt.clouddn.com/jiegoudong.png",
+      "icon": "http://puq7bvxwj.bkt.clouddn.com/jiegoudong.png",
       "openType": 2,
       "extend": false,
       "childs": null,
@@ -46,7 +46,7 @@
       "title": "基于元路径发现的异质网络研究",
       "pageURL": "demo/meathPath",
       "name": "基于元路径发现的异质网络研究",
-       "icon": "http://puq7bvxwj.bkt.clouddn.com/yangyudi.png",
+      "icon": "http://puq7bvxwj.bkt.clouddn.com/yangyudi.png",
       "openType": 2,
       "extend": false,
       "childs": null,
@@ -71,8 +71,7 @@
       "extend": false,
       "childs": null,
       "id": 58
-    }
-    ,
+    },
     {
       "title": "流数据聚类",
       "pageURL": "demo/streamCluster",
@@ -82,8 +81,7 @@
       "extend": false,
       "childs": null,
       "id": 5801
-    }
-     ,
+    },
     {
       "title": "多视角数据",
       "pageURL": "demo/multiview",
@@ -93,8 +91,7 @@
       "extend": false,
       "childs": null,
       "id": 5802
-    }
-    ,
+    },
     {
       "title": "基于情感度的多分辨率空间事件预测",
       "pageURL": "demo/allyangxiao",
@@ -104,8 +101,7 @@
       "extend": false,
       "childs": null,
       "id": 5
-    }
-    ,
+    },
     {
       "title": "基于时间标签的流行社交位置发现",
       "pageURL": "demo/sociallocation",

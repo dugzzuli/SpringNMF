@@ -1,5 +1,6 @@
 package com.dugking.algorithmNMF;
 
+import java.io.Serializable;
 import java.util.Random;
 
 import Jama.Matrix;
@@ -9,7 +10,11 @@ import smile.clustering.KMeans;
  * @author Administrator
  *
  */
-public class Single_GNMF {
+public class Single_GNMF   implements Serializable  {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4242005887637799360L;
 	private Matrix W, H, V;
 	private int k = 0, maxIter = 0, m, n, finalIter = 0;
 	private double absErrE = 0, relarErrE = 0;;
@@ -158,7 +163,9 @@ public class Single_GNMF {
 			System.out.println("¾ø¶ÔÕ`²î:" + err);
 
 			System.out.println("¾ø¶ÔÕ`²î:" + Math.abs(lastErr - err));
-
+			
+			errAll[i][0]=err;
+			
 			if (err < absErrE) {
 				System.out.println("¾ø¶ÔÎó²îÖµÖÕÖ¹");
 				finalIter = i;

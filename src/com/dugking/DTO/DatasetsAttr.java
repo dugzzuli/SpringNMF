@@ -6,6 +6,15 @@ public class DatasetsAttr {
 	int samples;
 	String url;
 	int clusterNum;
+	String Datasetname;
+	public String getDatasetname() {
+		return Datasetname;
+	}
+
+	public void setDatasetname(String datasetname) {
+		Datasetname = datasetname;
+	}
+
 	public String getUrl() {
 		return url;
 	}
