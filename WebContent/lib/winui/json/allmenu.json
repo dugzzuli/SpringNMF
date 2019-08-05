@@ -51,7 +51,7 @@
             },
             {
               "title": "多视角数据",
-              "pageURL": "demo/multiview",
+              "pageURL": "demo/showMultiview",
               "name": "多视角数据",
               "icon": "http://puq7bvxwj.bkt.clouddn.com/multiviewclustering.png",
               "openType": 2,

@@ -36,6 +36,14 @@
     font-family: Arial;
 }
 
+.version {
+    color: white;
+    position: fixed;
+    right: 5%;
+    bottom: 10%;
+    font-family: Arial;
+}
+
 #time {
     font-size: 86px;
 }

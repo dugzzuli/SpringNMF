@@ -169,9 +169,9 @@ public class DemoController {
 
 	
 	// 多视角控制器开始
-//	@RequestMapping("/multiview")
+	@RequestMapping("/showMultiview")
 	public ModelAndView multiview() {
-		ModelAndView model = new ModelAndView("multi_view");
+		ModelAndView model = new ModelAndView("multiviewNew/showMultiview");
 		return model;
 	}
 	

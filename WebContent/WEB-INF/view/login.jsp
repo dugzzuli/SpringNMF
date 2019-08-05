@@ -43,29 +43,31 @@ float: right; margin-right: 2%;
 
 	<div class="lock-body_login">
 		<div id="login_div" class="animated fadeIn">
-			<img src="images/os_windows.png" />
-				<br>
-				<div class="winui-from-group">
-					<input name="user" id="user" value="" placeholder="输入用户名"
-						height="36" />
-				</div>
+			<img src="images/os_windows.png" /> <br>
+			<div class="winui-from-group">
+				<input name="user" id="user" value="" placeholder="输入用户名"
+					height="36" />
+			</div>
 
-				<br>
-				<div class="winui-from-group">
-					<input type="password" name="password" id="pwd" value=""
-						placeholder="输入密码" height="36" />
-					<button class="login">
-						<i class="fa fa-arrow-right"></i>
-					</button>
-				</div>
-				<br>
-				<div class="winui-from-group" style="border:none;">
-					<p class="">Version:0.01</p>
-					<p class="">完成时间:2019-08-05</p>
-					<p class="">完成单位:云南大学信息学院</p>
-					<p class="">项目名称:<br/>基于传感数据的公共安全事件预警关键技术研究</p>
-				</div>
-			
+			<br>
+			<div class="winui-from-group">
+				<input type="password" name="password" id="pwd" value=""
+					placeholder="输入密码" height="36" />
+				<button class="login">
+					<i class="fa fa-arrow-right"></i>
+				</button>
+			</div>
+			<br>
+
+
+		</div>
+		<div class="version" style="border: none;">
+			<p class="">Version:0.01</p>
+			<p class="">完成时间:2019-08-05</p>
+			<p class="">完成单位:云南大学信息学院</p>
+			<p class="">
+				项目名称:<br />基于传感数据的公共安全事件预警关键技术研究
+			</p>
 		</div>
 		<div id="date_time" class="animated fadeIn"></div>
 	</div>
