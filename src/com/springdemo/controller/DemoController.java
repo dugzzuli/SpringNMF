@@ -119,6 +119,11 @@ public class DemoController {
 		return "NetworkEmbedding";
 	}
 
+	@RequestMapping("/showClusterAnalysis")
+	public String showClusterAnalysis()
+	{
+		return "multiviewNew/showClusterAnalysis";
+	}
 	@RequestMapping("/DeepHawkes")
 	public String DeepHawkes() {
 		return "DeepHawkes";

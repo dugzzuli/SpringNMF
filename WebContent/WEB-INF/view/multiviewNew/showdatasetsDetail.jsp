@@ -14,7 +14,7 @@
 <meta charset="UTF-8" />
 <title>多视角数据集</title>
 <base href="<%=basePath%>">
-<body style="overflow: hidden;">
+<body style="overflow-x: hidden;">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 panel panel-default"
@@ -35,7 +35,7 @@
 				</div>
 				<div class="col-sm-8"></div>
 			</div>
-			<div class="col-sm-6">
+			<div class="col-md-6 col-sm-12">
 				<div class="col-sm-12 panel panel-default table-responsive">
 					<div class="panel-heading">
 						<h3 class="panel-title">数据集信息</h3>
@@ -78,7 +78,7 @@
 				</div>
 			</div>
 
-			<div class="col-sm-6">
+			<div class="col-md-6 col-sm-12">
 				<div class="col-sm-12 panel panel-default table-responsive">
 					<div class="panel-heading">
 						<h3 class="panel-title">当前视角信息</h3>

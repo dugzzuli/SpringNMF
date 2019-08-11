@@ -49,11 +49,11 @@
                        <iframe src="http://localhost:8080/SpringNMF/demo/showdatasetsDetail" frameborder=0 style="width:100%; height:700px;"></iframe>
                     </div>
                     <div class="winui-tab-item">
-                        <iframe src="http://localhost:8080/SpringNMF/demo/showDataAnalysis" frameborder=0 style="width:100%; height:1000px;"></iframe>
+                        <iframe src="http://localhost:8080/SpringNMF/demo/showDataAnalysis" frameborder=0 style="width:100%; height:700px;"></iframe>
                     </div>
-                    <div class="winui-tab-item">
+                    <!-- <div class="winui-tab-item">
                        <iframe src="http://localhost:8080/SpringNMF/demo/showCluster" frameborder=0 style="width:100%; height:1000px;"></iframe>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
