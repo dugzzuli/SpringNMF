@@ -65,7 +65,7 @@
 									</h3>
 								</div>
 								<div class="panel-body" id="leftPanel" >
-									<textarea class="form-control" 
+									<textarea class="form-control" id="resultMNMF"
 										rows="19" style="background-color:white; min-width: 100%; border:none;" readonly></textarea>
 								</div>
 
@@ -280,6 +280,7 @@ var getting = {
 		json.series = series;
 
 		$('#container').highcharts(json);
+		$("#resultMNMF").text(data["clusterResult"]);
 	}
 
 	$(document).ready(
@@ -295,7 +296,7 @@ var getting = {
 											+ "-l" + " " + "0.1");
 							$("#maxIter option[value=" + 100 + "]").attr(
 									"selected", "selected");
-							$("#relarErr option[value=1e-1}]").attr("selected",
+							$("#relarErr option[value='1e-1'}]").attr("selected",
 									"selected");
 						});
 				$("#subJson").click(function() {

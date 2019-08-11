@@ -628,7 +628,11 @@ public class DemoController {
 		int[] arrLabel = ListUnion.getDouble2Int(label);
 		GlobalData.labelData = arrLabel;
 		modelGNMF.getClusterLabel(modelGNMF.getH());
-
+		
+		String sb = getOutputSb(modelGNMF.getLabelCluster(), arrLabel, clusterNum);
+		
+		json.setClusterResult(sb.toString());
+		
 		System.out.println(ClusterEvaluation.NMI(modelGNMF.getLabelCluster(), arrLabel));
 		System.out.println(ClusterEvaluation.Purity(modelGNMF.getLabelCluster(), arrLabel));
 		System.out.println("MNMF");
